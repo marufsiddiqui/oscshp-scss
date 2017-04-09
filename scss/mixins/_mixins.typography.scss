@@ -1,0 +1,146 @@
+///*------------------------------------*\
+//    #MIXINS
+//\*------------------------------------*/
+
+// s7nxt.css has a number of default mixins that the framework, and developers
+// working with it, can make use of.
+
+
+
+
+
+// Create a fully formed type style (sizing and vertical rhythm) by passing in a
+// single value, e.g.:
+//
+// .foo {
+//     @include s7nxt-font-size(12px);
+// }
+//
+// This will generate a rem-based font-size with its pixel fallback, as well as
+// a unitless line-height which will place the element on your baseline, e.g.:
+//
+// .foo {
+//     font-size: 12px;
+//     font-size: 0.75rem;
+//     line-height: 2;
+// }
+//
+// If you do not want s7nxt.css to generate you a line-height automatically, you
+// simply pass in your own as a second paramater:
+//
+// .foo {
+//     @include s7nxt-font-size(12px, 1.5);
+// }
+//
+// This will yield:
+//
+// .foo {
+//     font-size: 12px;
+//     font-size: 0.75rem;
+//     line-height: 1.5;
+// }
+//
+// This parameter can be any integer, ‘inherit’, or ‘normal’. If you don’t want
+// a line-height at all, pass in a second paramater of ‘none’ or ‘false’:
+//
+// .foo {
+//     @include s7nxt-font-size(12px, none);
+// }
+//
+// This will yield:
+//
+// .foo {
+//     font-size: 12px;
+//     font-size: 0.75rem;
+// }
+
+@mixin s7nxt-font-size($font-size, $line-height: auto, $important: false) {
+    $remSize: ($font-size / $inuit-base-font-size) * 1rem;
+    font-size: if($important, $remSize !important, $remSize);
+
+    @if $line-height != auto {
+
+        @if (type-of($line-height) == number or $line-height == inherit or $line-height == normal) {
+            line-height: $line-height;
+        }
+
+        @elseif ($line-height != none and $line-height != false) {
+            @warn "D’oh! ‘#{$line-height}’ is not a valid value for `line-height`."
+        }
+
+    }
+
+}
+
+// Pass a CSS property and a pixel value to this mixin
+//
+// Example:
+//
+// .foo {
+//     @include s7nxt-rem(margin-bottom, 20px);
+// }
+//
+// this will output (if the base font size is 16px):
+//
+// .foo {
+//     margin-bottom: 1.25rem;
+// }
+@mixin s7nxt-rem($s7nxt-css-property: null, $s7nxt-size: null, $important: false) {
+
+    @if ($s7nxt-css-property == null or type-of($s7nxt-css-property) != string) {
+        @error "D’oh! ‘#{$s7nxt-css-property}’ is not a valid name for a CSS Property."
+    } @else {
+        @if ($s7nxt-size == null) {
+            @error "D’oh! ‘#{$s7nxt-size}’ is not a valid value for `#{$s7nxt-css-property}`."
+        } @else {
+            @if unitless($s7nxt-size) {
+                @warn "$s7nxt-size may not be unitless, was #{$s7nxt-size}.";
+            } @else {
+                $remSize: ($s7nxt-size / $inuit-base-font-size) * 1rem;
+                #{$s7nxt-css-property}: if($important, $remSize !important, $remSize);
+            }
+        }
+    }
+}
+
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+}
+
+@mixin s7nxt-fluid-type($properties, $min-vw, $max-vw, $min-value, $max-value, $important: false) {
+    @each $property in $properties {
+        #{$property}: if($important, $min-value !important, $min-value);
+    }
+
+    @media screen and (min-width: $min-vw) {
+        @each $property in $properties {
+
+            @if $important == true {
+                #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}) !important;
+            } @else {
+                #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)});
+            }
+        }
+    }
+
+    @media screen and (min-width: $max-vw) {
+        @each $property in $properties {
+            #{$property}: if($important, $max-value !important, $max-value);
+        }
+    }
+}
+
+
+// word wrap
+@mixin word-wrap() {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+// List options
+// [converter] extracted from `.list-unstyled` for libsass compatibility
+@mixin list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}

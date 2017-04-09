@@ -1,0 +1,188 @@
+// Input group
+// Easily extend form controls by adding text, buttons, or button groups on either side of textual <input>s.
+// Copied and modified from Twitter Bootstrap v4
+
+$s7nxt-input-group-name: 'o-input-group' !default;
+
+@if ($s7nxt-enable-input-group == true) {
+
+    .#{$s7nxt-input-group-name} {
+        //
+        // Base styles
+        //
+        position: relative;
+        display: flex;
+        width: 100%;
+
+        .o-form__control {
+            // Bring the 'active' form control to the front
+            @include hover-focus-active {
+                z-index: 3;
+            }
+            // Ensure that the input is always above the *appended* addon button for
+            // proper border colors.
+            position: relative;
+            z-index: 2;
+            flex: 1 1 auto;
+            // Add width 1% and flex-basis auto to ensure that button will not wrap out
+            // the column. Applies to IE Edge+ and Firefox. Chrome does not require this.
+            width: 1%;
+            margin-bottom: 0;
+        }
+
+        &__addon,
+        &__btn,
+        .o-form__control {
+            // Vertically centers the content of the addons within the input group
+            display: flex;
+            align-items: center;
+
+            &:not(:first-child):not(:last-child) {
+                @include border-radius(0);
+            }
+        }
+
+        &__addon,
+        &__btn {
+            white-space: nowrap;
+            vertical-align: middle; // Match the inputs
+        }
+
+
+        // Sizing options
+        //
+        // Remix the default form control sizing classes into new ones for easier
+        // manipulation.
+
+        &--lg > .o-form__control,
+        &--lg > &__addon,
+        &--lg > &__btn > .o-btn {
+            @extend .o-form__control-lg;
+        }
+
+        &--sm > .o-form__control,
+        &--sm > &__addon,
+        &--sm > &__btn > .o-btn {
+            @extend .o-form__control-sm;
+        }
+
+
+        //
+        // Text input groups
+        //
+
+        &__addon {
+            @include s7nxt-font-size($s7nxt-font-size, $s7nxt-base-line-height); // Match inputs
+            @include border-radius($s7nxt-input-border-radius);
+            padding: $s7nxt-input-padding-y $s7nxt-input-padding-x;
+            margin-bottom: 0; // Allow use of <label> elements by overriding our default margin-bottom
+            // font-weight: $font-weight-normal;
+            line-height: $s7nxt-line-height;
+            // color: $input-color;
+            text-align: center;
+            background-color: $s7nxt-input-group-addon-bg;
+            border: $s7nxt-input-btn-border-width solid $s7nxt-input-group-addon-border-color;
+
+            // Sizing
+            &.o-form__control-sm {
+                @include s7nxt-font-size($s7nxt-font-size--small, $s7nxt-line-height-small);
+                @include border-radius($s7nxt-input-border-radius-sm);
+                padding: $s7nxt-padding-small-vertical $s7nxt-padding-small-horizontal;
+            }
+
+            &.o-form__control-lg {
+                @include s7nxt-font-size($s7nxt-font-size--large, $s7nxt-line-height-large);
+                @include border-radius($s7nxt-input-border-radius-lg);
+                padding: $s7nxt-padding-large-vertical $s7nxt-padding-large-horizontal;
+            }
+
+            // scss-lint:disable QualifyingElement
+            // Nuke default margins from checkboxes and radios to vertically center within.
+            input[type='radio'],
+            input[type='checkbox'] {
+                margin-top: 0;
+            }
+            // scss-lint:enable QualifyingElement
+        }
+
+
+        //
+        // Reset rounded corners
+        //
+
+        .o-form__control:not(:last-child),
+        &__addon:not(:last-child),
+        &__btn:not(:last-child) > .o-btn,
+        &__btn:not(:last-child) > .o-btn-group > .o-btn,
+        &__btn:not(:last-child) > .dropdown-toggle,
+        &__btn:not(:first-child) > .o-btn:not(:last-child):not(.dropdown-toggle),
+        &__btn:not(:first-child) > .o-btn-group:not(:last-child) > .o-btn {
+            @include border-right-radius(0);
+        }
+
+        &__addon:not(:last-child) {
+            border-right: 0;
+        }
+
+        .o-form__control:not(:first-child),
+        &__addon:not(:first-child),
+        &__btn:not(:first-child) > .o-btn,
+        &__btn:not(:first-child) > .o-btn-group > .o-btn,
+        &__btn:not(:first-child) > .dropdown-toggle,
+        &__btn:not(:last-child) > .o-btn:not(:first-child),
+        &__btn:not(:last-child) > .o-btn-group:not(:first-child) > .o-btn {
+            @include border-left-radius(0);
+        }
+
+        .o-form__control + &__addon:not(:first-child) {
+            border-left: 0;
+        }
+
+        //
+        // Button input groups
+        //
+
+        &__btn {
+            position: relative;
+            // Jankily prevent input button groups from wrapping with `white-space` and
+            // `font-size` in combination with `inline-block` on buttons.
+            font-size: 0;
+            white-space: nowrap;
+
+            // Negative margin for spacing, position for bringing hovered/focused/actived
+            // element above the siblings.
+            > .o-btn {
+                // Bring the 'active' button to the front
+                @include hover-focus-active {
+                    z-index: 3;
+                }
+                position: relative;
+
+                + .o-btn {
+                    margin-left: (-$s7nxt-input-btn-border-width);
+                }
+            }
+
+            // Negative margin to only have a single, shared border between the two
+            &:not(:last-child) {
+                > .o-btn,
+                > .o-btn-group {
+                    margin-right: (-$s7nxt-input-btn-border-width);
+                }
+            }
+
+            &:not(:first-child) {
+                > .o-btn,
+                > .o-btn-group {
+                    // Because specificity
+                    @include hover-focus-active {
+                        z-index: 3;
+                    }
+
+                    z-index: 2;
+                    margin-left: (-$s7nxt-input-btn-border-width);
+                }
+            }
+        }
+    }
+}

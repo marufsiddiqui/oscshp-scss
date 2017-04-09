@@ -1,0 +1,65 @@
+$s7nxt-input-iostoggle: 'iostoggle';
+
+.#{$s7nxt-input-iostoggle}-description {
+    display: table-cell;
+    vertical-align: middle;
+}
+.#{$s7nxt-input-iostoggle}-switch {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px;
+}
+input[type='checkbox'].#{$s7nxt-input-iostoggle}-input {
+    position: absolute;
+    margin-left: -9999px;
+    visibility: hidden;
+
+    & + label {
+        display: block;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+    }
+
+    &-round + label {
+        padding: 2px;
+        width: 120px;
+        height: 60px;
+        background-color: #dddddd;
+        border-radius: 60px;
+    }
+
+    &-round + label::before,
+    &-round + label::after {
+        display: block;
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        bottom: 1px;
+        content: "";
+    }
+
+    &-round + label::before {
+        right: 1px;
+        background-color: $s7nxt-brand-color;
+        border-radius: 60px;
+        transition: background 0.4s;
+    }
+
+    &-round + label::after {
+        width: 58px;
+        background-color: #fff;
+        border-radius: 100%;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        transition: margin 0.4s;
+    }
+
+    &-round:checked + label::before {
+        background-color: #8ce196;
+    }
+
+    &-round:checked + label::after {
+        margin-left: 60px;
+    }
+}

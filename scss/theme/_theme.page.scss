@@ -1,0 +1,14 @@
+// Link color
+a {
+    font-size: 100%;
+    text-decoration: none;
+    vertical-align: baseline;
+    padding: 0;
+    background: 0 0;
+    color: $s7nxt-link-color;
+}
+
+a:active {
+    color: $s7nxt-link-active-color;
+    background-color: $s7nxt-link-active-bg-color;
+}

@@ -1,0 +1,111 @@
+$s7nxt-pwreset-name: 'c-pw-strength';
+$s7nxt-pwreset-list-color: #a0a0a0 !default;
+$s7nxt-pwreset-list-color--success: #83ce40 !default;
+$s7nxt-pwreset-icon-size: 20px !default;
+$s7nxt-pwreset-progress-bg-color: #bababa !default;
+$s7nxt-pwreset-progressbar-bg-color: #eee !default;
+$s7nxt-pwreset-progressbar-bg-color--weak: #f5382f !default;
+$s7nxt-pwreset-progressbar-bg-color--moderate: #f09025 !default;
+$s7nxt-pwreset-progressbar-bg-color--strong: $s7nxt-pwreset-list-color--success !default;
+$s7nxt-pwreset-progress-hint-color: #666 !default;
+
+@if ($s7nxt-enable-pwreset == true) {
+
+    .#{$s7nxt-pwreset-name} {
+
+        &__check-list {
+            color: $s7nxt-pwreset-list-color;
+        }
+
+        &__list-item {
+            @include s7nxt-font-size($s7nxt-font-size--medium);
+            line-height: $s7nxt-pwreset-icon-size;
+
+            .sprite {
+
+                &.-ios7-checkmark-empty {
+                    width: $s7nxt-pwreset-icon-size;
+                    height: $s7nxt-pwreset-icon-size;
+                    margin-right: $s7nxt-base-spacing-unit--tiny;
+                    margin-bottom: $s7nxt-base-spacing-unit--tiny;
+                    vertical-align: middle;
+                    border: 1px solid $s7nxt-pwreset-list-color;
+                    border-radius: 50%;
+                    fill: $s7nxt-pwreset-list-color;
+                }
+            }
+
+            &.is-success {
+                color: $s7nxt-pwreset-list-color--success;
+
+                .sprite {
+
+                    &.-ios7-checkmark-empty {
+                        border: 1px solid $s7nxt-pwreset-list-color--success;
+                        fill: $s7nxt-pwreset-list-color--success;
+                    }
+                }
+            }
+        }
+
+        @keyframes progress-bar-stripes {
+            from {
+                background-position: 40px 0;
+            }
+
+            to {
+                background-position: 0 0;
+            }
+        }
+
+        &__progress {
+            height: 5px;
+            margin-bottom: 7px;
+            overflow: hidden;
+            background-color: $s7nxt-pwreset-progress-bg-color;
+            border-radius: 0;
+
+            &-bar {
+                @include s7nxt-font-size(13px);
+                float: left;
+                width: 0%;
+                height: 100%;
+                min-width: 0%;
+                line-height: normal;
+                color: #000;
+                text-align: center;
+                background-color: $s7nxt-pwreset-progressbar-bg-color;
+                transition: width .6s ease;
+
+                &.is-strong {
+                    background-color: $s7nxt-pwreset-progressbar-bg-color--strong;
+                }
+
+                &.is-moderate {
+                    background-color: $s7nxt-pwreset-progressbar-bg-color--moderate;
+                }
+
+                &.is-weak {
+                    background-color: $s7nxt-pwreset-progressbar-bg-color--weak;
+                }
+            }
+
+            &.is-active,
+            &-bar .is-active {
+                animation: progress-bar-stripes 2s linear infinite;
+            }
+
+            &-title {
+                @include s7nxt-font-size(16px);
+                margin: 15px 0 4px;
+            }
+        }
+
+        &__hint {
+            @include s7nxt-font-size(14px, 1.3);
+            display: inline-block;
+            font-weight: 400;
+            color: $s7nxt-pwreset-progress-hint-color;
+        }
+    }
+}

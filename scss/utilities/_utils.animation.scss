@@ -1,0 +1,34 @@
+@if ($s7nxt-enable-utils-component-animations == true) {
+
+    .u-float-up-fast,
+    .u-float-up-medium,
+    .u-float-up-slow,
+    .u-float-up-slower {
+        opacity: 0;
+        transform: translate(0, 25px);
+    }
+
+    .u-float-up-fast {
+        transition: all 1.5s ease .3s;
+    }
+
+    .u-float-up-medium {
+        transition: all 1.5s ease .5s;
+    }
+
+    .u-float-up-slow {
+        transition: all 1.5s ease .7s;
+    }
+
+    .u-float-up-slower {
+        transition: all 1.5s ease 1s;
+    }
+
+    .u-animate-active .u-float-up-fast,
+    .u-animate-active .u-float-up-medium,
+    .u-animate-active .u-float-up-slow,
+    .u-animate-active .u-float-up-slower {
+        opacity: 1 !important;
+        transform: translate(0, 0) !important;
+    }
+}

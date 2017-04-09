@@ -1,0 +1,56 @@
+/*------------------------------------*\
+    #Responsive CSS Triangles
+\*------------------------------------*/
+
+$s7nxt-arrow-name: "o-arrow" !default;
+
+$s7nxt-arrow-size:       2.6vw !default;
+
+$s7nxt-direction-map: (
+    'top': 'top',
+    'right': 'right',
+    'bottom': 'bottom',
+    'left': 'left',
+    'top-down': 'bottom',
+    'down-top': 'top',
+    'vertical': 'inside'
+    );
+
+@if ($s7nxt-enable-arrows == true) {
+
+    .#{$s7nxt-arrow-name}-trans {
+        position: relative;
+        overflow: hidden;
+        z-index: 2;
+
+        & + * {
+            margin-top: -$s7nxt-arrow-size;
+        }
+
+        &:before,
+        &:after {
+            content:'';
+            position: absolute;
+            bottom: -1px;
+            width: 50%;
+            background-color: white;
+            padding-bottom: $s7nxt-arrow-size;
+        }
+
+        &:before {
+            right: 50%;
+            transform-origin: 100% 100%;
+            transform: skewX(45deg);
+        }
+
+        &:after {
+            left: 50%;
+            transform-origin: 0 100%;
+            transform: skewX(-45deg);
+        }
+    }
+}
+
+/*Responsive CSS triangles. Resize the Result section to see the triangles in action.*/
+
+@include s7nxt-arrows($s7nxt-direction-map, $s7nxt-arrow-size);

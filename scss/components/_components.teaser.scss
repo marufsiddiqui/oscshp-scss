@@ -1,0 +1,154 @@
+// Teaser compontent
+// -------------------------
+
+// Defaults
+$s7nxt-teaser-name: 'c-teaser' !default;
+
+// Layout defaults
+$s7nxt-teaser-height: 390px !default;
+$s7nxt-teaser-height-mobile: 57vw !default;
+$s7nxt-teaser-bg: $s7nxt-brand-color !default;
+
+// Hero element
+$s7nxt-teaser-hero-color-bg: white !default;
+$s7nxt-teaser-hero-color-bg-opacity: 0.75 !default;
+$s7nxt-teaser-hero-color-bg-hover: $s7nxt-teaser-hero-color-bg !default;
+$s7nxt-teaser-hero-color: $s7nxt-text-color !default;
+$s7nxt-teaser-hero-icon-color: $s7nxt-teaser-hero-color !default;
+$s7nxt-teaser-hero-font-size: 18px !default;
+$s7nxt-teaser-hero-font-size-sub: 16px !default;
+$s7nxt-teaser-hero-font-size-larger: $s7nxt-font-size--larger !default;
+$s7nxt-teaser-hero-font-size-sub-larger: $s7nxt-teaser-hero-font-size !default;
+
+@if ($s7nxt-enable-teaser == true) {
+
+    .#{$s7nxt-teaser-name} {
+        position: relative;
+        display: block;
+        padding: 0;
+        margin-bottom: $s7nxt-base-spacing-unit;
+        height: 100%;
+        background-size: cover;
+        text-decoration: none;
+
+        @include media-query(md-and-up) {
+            margin-bottom: 0;
+        }
+
+        &__wrapper {
+
+            @include media-query(md-and-up) {
+                display: table;
+                width: 100%;
+            }
+        }
+
+        &__cell {
+
+            @include media-query(md-and-up) {
+                display: table-cell;
+                vertical-align: top;
+            }
+        }
+
+        &--main {
+            min-height: $s7nxt-teaser-height-mobile;
+
+            @include media-query(md-and-up) {
+                min-height: $s7nxt-teaser-height;
+            }
+        }
+
+        &--half {
+
+            > .#{$s7nxt-teaser-name} {
+                min-height: $s7nxt-teaser-height-mobile;
+            }
+
+            @include media-query(md-and-up) {
+                height: calc((#{$s7nxt-teaser-height} / 2) + (#{$s7nxt-grid-gutter--small} / 2));
+
+                > .#{$s7nxt-teaser-name} {
+                    min-height: inherit;
+                }
+            }
+        }
+
+        &--gutters {
+
+            @include media-query(md-and-up) {
+                padding-left: $s7nxt-base-spacing-unit--small;
+                margin: -$s7nxt-grid-gutter--small 0 $s7nxt-grid-gutter--small 0-$s7nxt-grid-gutter--small;
+
+                > .#{$s7nxt-teaser-name}__block {
+                    padding: $s7nxt-grid-gutter--small 0 0 $s7nxt-grid-gutter--small;
+                }
+            }
+        }
+
+        @at-root a#{&} {
+
+            &:hover {
+
+                .#{$s7nxt-teaser-name}__hero {
+                    background-color: $s7nxt-teaser-hero-color-bg;
+                    color: $s7nxt-teaser-hero-color;
+                }
+            }
+        }
+
+        &__hero {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            padding: 15px 35px 15px $s7nxt-base-spacing-unit;
+            background-color: rgba($s7nxt-teaser-hero-color-bg, $s7nxt-teaser-hero-color-bg-opacity);
+            transition: background-color .3s;
+
+            @include media-query(md-and-up) {
+                bottom: $s7nxt-base-spacing-unit--small;
+                right: $s7nxt-base-spacing-unit--small;
+                left: auto;
+                margin-left: $s7nxt-base-spacing-unit;
+            }
+
+            &-hd {
+                margin: 0;
+                @include s7nxt-font-size($s7nxt-teaser-hero-font-size, 1.2);
+                text-transform: uppercase;
+                color: $s7nxt-teaser-hero-color;
+
+                &-sub {
+                    display: block;
+                    @include s7nxt-font-size($s7nxt-teaser-hero-font-size-sub, 1.2);
+                    text-transform: none;
+                }
+            }
+
+            &--large {
+
+                .#{$s7nxt-teaser-name}__hero-hd {
+                    @include s7nxt-font-size($s7nxt-teaser-hero-font-size-larger, 1.2);
+
+                    &-sub {
+
+                        @include s7nxt-font-size($s7nxt-teaser-hero-font-size-sub-larger, 1.2);
+                    }
+                }
+            }
+        }
+
+        &__icon {
+            position: absolute;
+            right: 1px;
+            top: calc(50% - 24px/2 - 2px);
+            fill: $s7nxt-teaser-hero-icon-color;
+
+            &.sprite {
+                fill: $s7nxt-teaser-hero-icon-color;
+            }
+        }
+
+    }
+}

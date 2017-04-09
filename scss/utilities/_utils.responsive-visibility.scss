@@ -1,0 +1,15 @@
+@if ($s7nxt-enable-utils-responsive-visibility == true) {
+
+    @each $bp in $breakpoints {
+
+        // Get the name of the breakpoint.
+        $alias: nth($bp, 1);
+
+        @include media-query($alias) {
+
+            .u-hidden\@#{$alias} {
+                display: none !important;
+            }
+        }
+    }
+}

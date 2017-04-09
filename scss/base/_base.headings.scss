@@ -1,0 +1,121 @@
+/*------------------------------------*\
+    #HEADINGS
+\*------------------------------------*/
+
+/**
+ * Headings 1–6.
+ */
+
+$s7nxt-enable-responsive-headings: false !default;
+
+h1,
+.h1,
+%h1 {
+    @if ($s7nxt-enable-fluid-type) {
+        @include s7nxt-fluid-type(font-size, $s7nxt-fluid-type-min-vw, $s7nxt-fluid-type-max-vw, $s7nxt-heading-size-mobile-1, $s7nxt-heading-size-1);
+    } @else {
+        @include s7nxt-font-size($s7nxt-heading-size-mobile-1);
+
+        @if ($s7nxt-enable-responsive-headings) {
+
+            @include media-query(md-and-up) {
+                @include s7nxt-font-size($s7nxt-heading-size-1);
+            }
+        }
+    }
+}
+
+h2,
+.h2,
+%h2 {
+    @if ($s7nxt-enable-fluid-type) {
+        @include s7nxt-fluid-type(font-size, $s7nxt-fluid-type-min-vw, $s7nxt-fluid-type-max-vw, $s7nxt-heading-size-mobile-2, $s7nxt-heading-size-2);
+    } @else {
+        @include s7nxt-font-size($s7nxt-heading-size-mobile-2);
+
+        @if ($s7nxt-enable-responsive-headings) {
+
+            @include media-query(md-and-up) {
+                @include s7nxt-font-size($s7nxt-heading-size-2);
+            }
+        }
+    }
+}
+
+h3,
+.h3,
+%h3 {
+    @if ($s7nxt-enable-fluid-type) {
+        @include s7nxt-fluid-type(font-size, $s7nxt-fluid-type-min-vw, $s7nxt-fluid-type-max-vw, $s7nxt-heading-size-mobile-3, $s7nxt-heading-size-3);
+    } @else {
+        @include s7nxt-font-size($s7nxt-heading-size-mobile-3);
+
+        @if ($s7nxt-enable-responsive-headings) {
+
+            @include media-query(md-and-up) {
+                @include s7nxt-font-size($s7nxt-heading-size-3);
+            }
+        }
+    }
+}
+
+h4,
+.h4,
+%h4 {
+    @if ($s7nxt-enable-fluid-type) {
+        @include s7nxt-fluid-type(font-size, $s7nxt-fluid-type-min-vw, $s7nxt-fluid-type-max-vw, $s7nxt-heading-size-mobile-4, $s7nxt-heading-size-4);
+    } @else {
+        @include s7nxt-font-size($s7nxt-heading-size-mobile-4);
+
+        @if ($s7nxt-enable-responsive-headings) {
+
+            @include media-query(md-and-up) {
+                @include s7nxt-font-size($s7nxt-heading-size-4);
+            }
+        }
+    }
+}
+
+h5,
+.h5,
+%h5 {
+    @if ($s7nxt-enable-fluid-type) {
+        @include s7nxt-fluid-type(font-size, $s7nxt-fluid-type-min-vw, $s7nxt-fluid-type-max-vw, $s7nxt-heading-size-mobile-5, $s7nxt-heading-size-5);
+    } @else {
+        @include s7nxt-font-size($s7nxt-heading-size-mobile-5);
+
+        @if ($s7nxt-enable-responsive-headings) {
+
+            @include media-query(md-and-up) {
+                @include s7nxt-font-size($s7nxt-heading-size-5);
+            }
+        }
+    }
+}
+
+h6,
+.h6,
+%h6 {
+    @if ($s7nxt-enable-fluid-type) {
+        @include s7nxt-fluid-type(font-size, $s7nxt-fluid-type-min-vw, $s7nxt-fluid-type-max-vw, $s7nxt-heading-size-mobile-6, $s7nxt-heading-size-6);
+    } @else {
+        @include s7nxt-font-size($s7nxt-heading-size-mobile-6);
+
+        @if ($s7nxt-enable-responsive-headings) {
+
+            @include media-query(md-and-up) {
+                @include s7nxt-font-size($s7nxt-heading-size-6);
+            }
+        }
+    }
+}
+
+
+h1, .h1, %h1,
+h2, .h2, %h2,
+h3, .h3, %h3,
+h4, .h4, %h4,
+h5, .h5, %h5,
+h6, .h6, %h6 {
+    font-family: $s7nxt-font-family-headings;
+}

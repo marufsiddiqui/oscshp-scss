@@ -1,0 +1,40 @@
+//
+// Component animations
+// --------------------------------------------------
+
+// Heads up!
+//
+// We don't use the `.opacity()` mixin here since it causes a bug with text
+// fields in IE7-8. Source: https://github.com/twbs/bootstrap/pull/3552.
+
+@if ($s7nxt-enable-utils-component-animations == true) {
+
+    .u-fade {
+        opacity: 0;
+        transition: opacity .15s linear;
+        &.in {
+            opacity: 1;
+        }
+    }
+
+    .u-collapse {
+        display: none;
+
+        &.in      { display: block; }
+        // [converter] extracted tr&.in to tr.u-collapse.in
+        // [converter] extracted tbody&.in to tbody.u-collapse.in
+    }
+
+    tr.u-collapse.in    { display: table-row; }
+
+    tbody.u-collapse.in { display: table-row-group; }
+
+    .u-collapsing {
+        position: relative;
+        height: 0;
+        overflow: hidden;
+        transition-property: height, visibility;
+        transition-duration: .35s;
+        transition-timing-function: ease;
+    }
+}

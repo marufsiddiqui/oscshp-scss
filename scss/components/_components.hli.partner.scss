@@ -1,0 +1,93 @@
+// Defaults
+$s7nxt-hli-partner-name: 'c-hli__partner' !default;
+$s7nxt-hli-partner-hd-margin-bottom: 74px !default;
+$s7nxt-hli-partner-box-padding-bottom: 110px !default;
+$s7nxt-hli-partner-logo-max-height: 38px !default;
+$s7nxt-hli-partner-logo-margin-bottom: $s7nxt-base-spacing-unit !default;
+$s7nxt-hli-partner-headline-font-size: $s7nxt-heading-size-4 !default;
+$s7nxt-hli-partner-headline-font-size-mobile: $s7nxt-heading-size-4 !default;
+$s7nxt-hli-partner-headline-margin-bottom: $s7nxt-base-spacing-unit--large !default;
+$s7nxt-hli-partner-show-border: true !default;
+$s7nxt-hli-partner-border-color: #848484 !default;
+
+
+@if ($s7nxt-enable-hli-partner == true) {
+
+    .#{$s7nxt-hli-partner-name} {
+
+        &-hd {
+            @include s7nxt-rem(margin-bottom, $s7nxt-hli-partner-hd-margin-bottom);
+        }
+
+        &-box {
+            position: relative;
+            padding-bottom: $s7nxt-hli-partner-box-padding-bottom;
+            text-align: center;
+
+            @include media-query(md-and-up) {
+                text-align: left;
+
+                @if $s7nxt-hli-partner-show-border {
+                    padding-top: 0;
+                    padding-left: $s7nxt-base-spacing-unit;
+                    border-top: 0;
+                    border-left: 1px solid $s7nxt-hli-partner-border-color;
+                }
+            }
+
+            &.-fitnessfirst {
+                margin-bottom: $s7nxt-base-spacing-unit--large;
+
+                @include media-query(md-and-up) {
+                    margin-bottom: 0;
+                }
+            }
+
+            @if $s7nxt-hli-partner-show-border {
+
+                &.-big {
+                    padding-top: $s7nxt-base-spacing-unit;
+                    border-top: 1px solid $s7nxt-hli-partner-border-color;
+
+                    @include media-query(md-and-up) {
+                        padding-top: 0;
+                        border-top: 0;
+                    }
+                }
+            }
+        }
+
+        &-logo {
+            max-height: $s7nxt-hli-partner-logo-max-height;
+            margin-bottom: $s7nxt-hli-partner-logo-margin-bottom;
+
+            @include media-query(md-and-up) {
+                display: block;
+            }
+        }
+
+        &-headline {
+            margin-bottom: $s7nxt-hli-partner-headline-margin-bottom;
+            font-size: $s7nxt-hli-partner-headline-font-size-mobile;
+
+            @include media-query(md-and-up) {
+                font-size: $s7nxt-hli-partner-headline-font-size;
+            }
+        }
+
+        &-description {
+            text-align: left;
+        }
+
+        &-btn {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+
+            @include media-query(md-and-up) {
+                text-align: left;
+            }
+        }
+    }
+}

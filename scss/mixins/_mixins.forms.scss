@@ -1,0 +1,133 @@
+$s7nxt-forms-name: 'o-form' !default;
+
+// Form validation states
+//
+// Used in _forms.scss to generate the form validation CSS for warnings, errors,
+// and successes.
+
+@mixin form-control-validation($color) {
+    // Color the label and help text
+    .#{$s7nxt-forms-name}__control-feedback,
+    .#{$s7nxt-forms-name}__control-label,
+    .col-form-label,
+    .#{$s7nxt-forms-name}__check-label,
+    .custom-control {
+        color: $color;
+    }
+
+    // Set the border and box shadow on specific inputs to match
+    .#{$s7nxt-forms-name}__control,
+    .custom-select,
+    .custom-file-control {
+        border-color: $color;
+
+        &:focus {
+            @include box-shadow($s7nxt-input-box-shadow, 0 0 6px lighten($color, 20%));
+        }
+    }
+
+    // Set validation states also for addons
+    .o-input-group__addon {
+        color: $color;
+        background-color: lighten($color, 40%);
+        border-color: $color;
+    }
+}
+
+// Form control focus state
+//
+// Generate a customized focus state and for any input with the specified color,
+// which defaults to the `@input-border-focus` variable.
+//
+// We highly encourage you to not customize the default value, but instead use
+// this to tweak colors on an as-needed basis. This aesthetic change is based on
+// WebKit's default styles, but applicable to a wider range of browsers. Its
+// usability and accessibility should be taken into account with any change.
+//
+// Example usage: change the default blue border and shadow to white for better
+// contrast against a dark gray background.
+@mixin form-control-focus() {
+    &:focus {
+        @include box-shadow($s7nxt-input-box-shadow-focus);
+        color: $s7nxt-input-color-focus;
+        background-color: $s7nxt-input-bg-focus;
+        border-color: $s7nxt-input-border-focus;
+        outline: none;
+    }
+}
+
+
+
+// @deprecated
+
+// [converter] extracted from `.#{$s7nxt-forms-name}__inline` for libsass compatibility
+@mixin form-inline {
+
+  // Kick in the inline
+  @include media-query(md-and-up) {
+    // Inline-block all the things for "inline"
+    .#{$s7nxt-forms-name}__group {
+      display: inline-block;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+
+    // In navbar-form, allow folks to *not* use `.#{$s7nxt-forms-name}__group`
+    .#{$s7nxt-forms-name}__control {
+      display: inline-block;
+      width: auto; // Prevent labels from stacking above inputs in `.#{$s7nxt-forms-name}__group`
+      vertical-align: middle;
+    }
+
+    // Make static controls behave like regular ones
+    .#{$s7nxt-forms-name}__control-static {
+      display: inline-block;
+    }
+
+    .#{$s7nxt-forms-name}__input-group {
+      display: inline-table;
+      vertical-align: middle;
+
+      .#{$s7nxt-forms-name}__input-group-addon,
+      .#{$s7nxt-forms-name}__input-group-btn,
+      .#{$s7nxt-forms-name}__control {
+        width: auto;
+      }
+    }
+
+    // Input groups need that 100% width though
+    .#{$s7nxt-forms-name}__input-group > .#{$s7nxt-forms-name}__control {
+      width: 100%;
+    }
+
+    .#{$s7nxt-forms-name}__control-label {
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+
+    // Remove default margin on radios/checkboxes that were used for stacking, and
+    // then undo the floating of radios and checkboxes to match.
+    .#{$s7nxt-forms-name}__radio,
+    .#{$s7nxt-forms-name}__checkbox {
+      display: inline-block;
+      margin-top: 0;
+      margin-bottom: 0;
+      vertical-align: middle;
+
+      label {
+        padding-left: 0;
+      }
+    }
+
+    .#{$s7nxt-forms-name}__radio input[type="radio"],
+    .#{$s7nxt-forms-name}__checkbox input[type="checkbox"] {
+      position: relative;
+      margin-left: 0;
+    }
+
+    // Re-override the feedback icon.
+    .has-feedback .#{$s7nxt-forms-name}__control-feedback {
+      top: 0;
+    }
+  }
+}

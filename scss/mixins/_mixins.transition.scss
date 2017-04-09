@@ -1,0 +1,9 @@
+@mixin transition($transition...) {
+    @if $s7nxt-enable-transitions {
+        @if length($transition) == 0 {
+            transition: $transition-base;
+        } @else {
+            transition: $transition;
+        }
+    }
+}

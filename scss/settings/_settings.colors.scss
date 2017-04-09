@@ -1,0 +1,22 @@
+// Gray colors
+$s7nxt-gray-darker: #333 !default;
+$s7nxt-gray-dark: #666 !default;
+$s7nxt-gray: #919191 !default;
+$s7nxt-gray-light: #ccc !default;
+$s7nxt-gray-lighter: #edeeed !default;
+$s7nxt-gray-lightest: #f3f3f3 !default;
+
+// Blues
+$s7nxt-blue: #282f46 !default;
+$s7nxt-blue-dark: darken($s7nxt-blue, 10%) !default;
+$s7nxt-blue-light: lighten($s7nxt-blue, 20%) !default;
+$s7nxt-blue-lighter: lighten($s7nxt-blue, 40%) !default;
+
+// Brand colors
+$s7nxt-brand-color: $s7nxt-blue !default;
+$s7nxt-brand-color--primary: #f53f72 !default;
+$s7nxt-brand-color--success: #5cb85c !default;
+$s7nxt-brand-color--danger: #d9534f !default;
+$s7nxt-brand-color--warning: #f0ad4e !default;
+
+$s7nxt-text-muted: $s7nxt-gray-light !default;

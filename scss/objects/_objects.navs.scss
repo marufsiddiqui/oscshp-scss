@@ -1,0 +1,271 @@
+/*------------------------------------*\
+    #Navs
+\*------------------------------------*/
+
+$s7nxt-nav-name: "o-nav" !default;
+
+//=== Shared nav styles
+$s7nxt-nav-link-padding:                          10px 15px !default;
+$s7nxt-nav-link-hover-bg:                         $s7nxt-gray-lighter !default;
+
+$s7nxt-nav-disabled-link-color:                   $s7nxt-gray-light !default;
+$s7nxt-nav-disabled-link-hover-color:             $s7nxt-gray-light !default;
+
+//== Tabs
+$s7nxt-nav-tabs-border-color:                     #ddd !default;
+
+$s7nxt-nav-tabs-link-hover-border-color:          $s7nxt-gray-lighter !default;
+
+$s7nxt-nav-tabs-active-link-hover-bg:             $s7nxt-body-bg !default;
+$s7nxt-nav-tabs-active-link-hover-color:          $s7nxt-gray !default;
+$s7nxt-nav-tabs-active-link-hover-border-color:   #ddd !default;
+
+$s7nxt-nav-tabs-justified-link-border-color:            #ddd !default;
+$s7nxt-nav-tabs-justified-active-link-border-color:     $s7nxt-body-bg !default;
+
+//== Pills
+$s7nxt-nav-pills-border-radius:                   $s7nxt-border-radius-base !default;
+$s7nxt-nav-pills-active-link-hover-bg:            $s7nxt-component-active-bg !default;
+$s7nxt-nav-pills-active-link-hover-color:         $s7nxt-component-active-color !default;
+
+
+// Base class
+// --------------------------------------------------
+
+@if ($s7nxt-enable-navs == true) {
+
+    .#{$s7nxt-nav-name} {
+        margin-bottom: 0;
+        padding-left: 0; // Override default ul/ol
+        list-style: none;
+        @extend %clearfix;
+
+        > li {
+            position: relative;
+            display: block;
+
+            > a {
+                position: relative;
+                display: block;
+                padding: $s7nxt-nav-link-padding;
+                &:hover,
+                &:focus {
+                    text-decoration: none;
+                    background-color: $s7nxt-nav-link-hover-bg;
+                }
+            }
+
+            // Disabled state sets text to gray and nukes hover/tab effects
+            &.disabled > a {
+                color: $s7nxt-nav-disabled-link-color;
+
+                &:hover,
+                &:focus {
+                    color: $s7nxt-nav-disabled-link-hover-color;
+                    text-decoration: none;
+                    background-color: transparent;
+                    cursor: $s7nxt-cursor-disabled;
+                }
+            }
+        }
+
+        // Open dropdowns
+        .open > a {
+            &,
+            &:hover,
+            &:focus {
+                background-color: $s7nxt-nav-link-hover-bg;
+                border-color: $s7nxt-link-color;
+            }
+        }
+
+        // Prevent IE8 from misplacing imgs
+        //
+        // See https://github.com/h5bp/html5-boilerplate/issues/984#issuecomment-3985989
+        > li > a > img {
+            max-width: none;
+        }
+    }
+
+
+    // Tabs
+    // -------------------------
+
+    // Give the tabs something to sit on
+    .#{$s7nxt-nav-name}--tabs {
+        border-bottom: 1px solid $s7nxt-nav-tabs-border-color;
+        > li {
+            float: left;
+            // Make the list-items overlay the bottom border
+            margin-bottom: -1px;
+
+            // Actual tabs (as links)
+            > a {
+                margin-right: 2px;
+                line-height: $s7nxt-base-line-height;
+                border: 1px solid transparent;
+                border-radius: $s7nxt-border-radius-base $s7nxt-border-radius-base 0 0;
+                &:hover {
+                    border-color: $s7nxt-nav-tabs-link-hover-border-color $s7nxt-nav-tabs-link-hover-border-color $s7nxt-nav-tabs-border-color;
+                }
+            }
+
+            // Active state, and its :hover to override normal :hover
+            &.active > a,
+            > a.active, {
+                &,
+                &:hover,
+                &:focus {
+                    color: $s7nxt-nav-tabs-active-link-hover-color;
+                    background-color: $s7nxt-nav-tabs-active-link-hover-bg;
+                    border: 1px solid $s7nxt-nav-tabs-active-link-hover-border-color;
+                    border-bottom-color: transparent;
+                    cursor: default;
+                }
+            }
+        }
+        // pulling this in mainly for less shorthand
+        &.#{$s7nxt-nav-name}--justified {
+            @extend .#{$s7nxt-nav-name}--justified;
+            @extend .#{$s7nxt-nav-name}--tabs-justified;
+        }
+    }
+
+
+    // Pills
+    // -------------------------
+    .#{$s7nxt-nav-name}--pills {
+        > li {
+            float: left;
+
+            // Links rendered as pills
+            > a {
+                border-radius: $s7nxt-nav-pills-border-radius;
+            }
+            + li {
+                margin-left: 2px;
+            }
+
+            // Active state
+            &.active > a,
+            > a.active, {
+                &,
+                &:hover,
+                &:focus {
+                    color: $s7nxt-nav-pills-active-link-hover-color;
+                    background-color: $s7nxt-nav-pills-active-link-hover-bg;
+                }
+            }
+        }
+    }
+
+
+    // Stacked pills
+    .#{$s7nxt-nav-name}--stacked {
+        > li {
+            float: none;
+            + li {
+                margin-top: 2px;
+                margin-left: 0; // no need for this gap between nav items
+            }
+        }
+    }
+
+
+    // Nav variations
+    // --------------------------------------------------
+
+    // Justified nav links
+    // -------------------------
+
+    .#{$s7nxt-nav-name}--justified {
+        width: 100%;
+
+        > li {
+            float: none;
+            > a {
+                text-align: center;
+                margin-bottom: 5px;
+            }
+        }
+
+        > .dropdown .dropdown__menu {
+            top: auto;
+            left: auto;
+        }
+
+        @include media-query(md-and-up) {
+            > li {
+                display: table-cell;
+                width: 1%;
+                > a {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    // Move borders to anchors instead of bottom of list
+    //
+    // Mixin for adding on top the shared `.#{$s7nxt-nav-name}--justified` styles for our tabs
+    .#{$s7nxt-nav-name}--tabs-justified {
+        border-bottom: 0;
+
+        > li > a {
+            // Override margin from .#{$s7nxt-nav-name}--tabs
+            margin-right: 0;
+            border-radius: $s7nxt-border-radius-base;
+        }
+
+        > .active > a,
+        > li > a.active,
+        > .active > a:hover,
+        > li > a.active:hover,
+        > .active > a:focus,
+        > li > a.active:focus {
+            border: 1px solid $s7nxt-nav-tabs-justified-link-border-color;
+        }
+
+        .breakpoint-md &,
+        .breakpoint-lg & {
+            > li > a {
+                border-bottom: 1px solid $s7nxt-nav-tabs-justified-link-border-color;
+                border-radius: $s7nxt-border-radius-base $s7nxt-border-radius-base 0 0;
+            }
+            > .active > a,
+            > li > a.active,
+            > .active > a:hover,
+            > li > a.active:hover,
+            > .active > a:focus,
+            > li > a.active:focus {
+                border-bottom-color: $s7nxt-nav-tabs-justified-active-link-border-color;
+            }
+        }
+    }
+
+
+    // Tabbable tabs
+    // -------------------------
+
+    // Hide tabbable panes to start, show them when `.active`
+    .o-tab__content {
+        > .o-tab__pane {
+            display: none;
+        }
+        > .active {
+            display: block;
+        }
+    }
+
+
+    // Dropdowns
+    // -------------------------
+
+    // Specific dropdowns
+    .#{$s7nxt-nav-name}--tabs .dropdown__menu {
+        // make dropdown border overlap tab border
+        margin-top: -1px;
+        // Remove the top rounded corners here since there is a hard edge above the menu
+        @include border-top-radius(0);
+    }
+}

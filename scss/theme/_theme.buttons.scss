@@ -1,0 +1,273 @@
+/*------------------------------------*\
+    #Buttons
+\*------------------------------------*/
+
+$s7nxt-buttons-name: 'o-btn' !default;
+
+//== Settings
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+$s7nxt-btn-font-size:                  18px !default;
+$s7nxt-btn-box-shadow-color:           rgba(0, 0, 0, .25) !default;
+$s7nxt-btn-box-shadow:                 0 2px 2px $s7nxt-btn-box-shadow-color !default;
+
+$s7nxt-btn-default-color:              #fff !default;
+$s7nxt-btn-default-bg:                 $s7nxt-brand-color !default;
+$s7nxt-btn-default-border:             darken($s7nxt-btn-default-bg, 5%) !default;
+$s7nxt-btn-default-color-hover:        null !default;
+$s7nxt-btn-default-bg-hover:           null !default;
+$s7nxt-btn-default-border-hover:       null !default;
+
+$s7nxt-btn-primary-color:              #fff !default;
+$s7nxt-btn-primary-bg:                 $s7nxt-brand-color--primary !default;
+$s7nxt-btn-primary-border:             darken($s7nxt-btn-primary-bg, 5%) !default;
+$s7nxt-btn-primary-color-hover:        null !default;
+$s7nxt-btn-primary-bg-hover:           null !default;
+$s7nxt-btn-primary-border-hover:       null !default;
+
+$s7nxt-btn-secondary-color:            $s7nxt-brand-color--primary !default;
+$s7nxt-btn-secondary-bg:               #fff !default;
+$s7nxt-btn-secondary-border:           $s7nxt-brand-color--primary !default;
+$s7nxt-btn-secondary-color-hover:      #fff !default;
+$s7nxt-btn-secondary-bg-hover:         $s7nxt-brand-color--primary !default;
+$s7nxt-btn-secondary-border-hover:     $s7nxt-brand-color--primary !default;
+
+$s7nxt-btn-success-color:              #fff !default;
+$s7nxt-btn-success-bg:                 $s7nxt-brand-color--success !default;
+$s7nxt-btn-success-border:             darken($s7nxt-btn-success-bg, 5%) !default;
+$s7nxt-btn-success-color-hover:        null !default;
+$s7nxt-btn-success-bg-hover:           null !default;
+$s7nxt-btn-success-border-hover:       null !default;
+
+$s7nxt-btn-warning-color:              #fff !default;
+$s7nxt-btn-warning-bg:                 $s7nxt-brand-color--warning !default;
+$s7nxt-btn-warning-border:             darken($s7nxt-btn-warning-bg, 5%) !default;
+$s7nxt-btn-warning-color-hover:        null !default;
+$s7nxt-btn-warning-bg-hover:           null !default;
+$s7nxt-btn-warning-border-hover:       null !default;
+
+$s7nxt-btn-danger-color:               #fff !default;
+$s7nxt-btn-danger-bg:                  $s7nxt-brand-color--danger !default;
+$s7nxt-btn-danger-border:              darken($s7nxt-btn-danger-bg, 5%) !default;
+$s7nxt-btn-danger-color-hover:         null !default;
+$s7nxt-btn-danger-bg-hover:            null !default;
+$s7nxt-btn-danger-border-hover:        null !default;
+
+$s7nxt-btn-link-disabled-color:        $s7nxt-gray-light !default;
+
+// Allows for customizing button radius independently from global border radius
+$s7nxt-btn-border-radius-base:         $s7nxt-border-radius-base !default;
+$s7nxt-btn-border-radius-large:        0 !default;
+$s7nxt-btn-border-radius-small:        $s7nxt-border-radius-small !default;
+
+// Font sizes
+$s7nxt-btn-font-size-small:            $s7nxt-font-size--small !default;
+$s7nxt-btn-font-size-medium:           $s7nxt-font-size--small !default;
+$s7nxt-btn-font-size-large:            $s7nxt-font-size--large !default;
+
+
+// Button variants
+//
+// Easily pump out default styles, as well as :hover, :focus, :active,
+// and disabled options for all buttons
+
+@mixin button-variant-theme($color, $background, $border, $color-hover: null, $background-hover: null, $border-hover: null) {
+  color: $color;
+  background-color: $background;
+      border-color: $border;
+
+  a {
+    color: $color;
+  }
+
+  &:focus,
+  &.focus {
+    color: if($color-hover, $color-hover, $color);
+    background-color: if($background-hover, $background-hover, darken($background, 10%));
+        border-color: if($border-hover, $border-hover, darken($border, 25%));
+
+    a {
+      color: if($color-hover, $color-hover, $color);
+    }
+  }
+  &:hover {
+    color: if($color-hover, $color-hover, $color);
+    background-color: if($background-hover, $background-hover, darken($background, 10%));
+        border-color: if($border-hover, $border-hover, darken($border, 12%));
+
+    a {
+      color: if($color-hover, $color-hover, $color);
+    }
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: if($color-hover, $color-hover, $color);
+    background-color: if($background-hover, $background-hover, darken($background, 10%));
+        border-color: if($border-hover, $border-hover, darken($border, 12%));
+
+    a {
+      color: if($color-hover, $color-hover, $color);
+    }
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: if($color-hover, $color-hover, $color);
+      background-color: if($background-hover, $background-hover, darken($background, 17%));
+      border-color: if($border-hover, $border-hover, darken($border, 25%));
+
+      a {
+        color: if($color-hover, $color-hover, $color);
+      }
+    }
+  }
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    background-image: none;
+  }
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: $background;
+          border-color: $border;
+    }
+  }
+
+  .o-badge {
+    color: $background;
+    background-color: $color;
+  }
+}
+
+// Button sizes
+@mixin button-size-theme($border-radius, $font-size) {
+  border-radius: $border-radius;
+  @include s7nxt-font-size($font-size, none);
+}
+
+
+// Base styles
+// --------------------------------------------------
+
+%#{$s7nxt-buttons-name},
+[role=button].#{$s7nxt-buttons-name} {
+  border: 1px solid transparent;
+  box-shadow: $s7nxt-btn-box-shadow;
+  @include button-size-theme($s7nxt-btn-border-radius-base, $s7nxt-btn-font-size);
+
+  &,
+  &:active,
+  &.active {
+    &:focus,
+    &.focus {
+      @include tab-focus;
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &.focus {
+    color: $s7nxt-btn-default-color;
+    text-decoration: none;
+
+    a {
+      color: $s7nxt-btn-default-color;
+    }
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+  }
+
+  &[disabled],
+  fieldset[disabled] & {
+    opacity: .65;
+    box-shadow: none;
+  }
+
+  // [converter] extracted a& to a[role=button].#{$s7nxt-buttons-name}
+}
+
+a[role=button].#{$s7nxt-buttons-name} {
+  text-decoration: none;
+}
+
+
+// Alternate buttons
+// --------------------------------------------------
+
+%#{$s7nxt-buttons-name},
+%#{$s7nxt-buttons-name}--default,
+[role=button].#{$s7nxt-buttons-name},
+[role=button].#{$s7nxt-buttons-name}--default {
+  @include button-variant-theme($s7nxt-btn-default-color, $s7nxt-btn-default-bg, $s7nxt-btn-default-border, $s7nxt-btn-default-color-hover, $s7nxt-btn-default-bg-hover, $s7nxt-btn-default-border-hover);
+}
+
+%#{$s7nxt-buttons-name}--primary,
+[role=button].#{$s7nxt-buttons-name}--primary {
+  @include button-variant-theme($s7nxt-btn-primary-color, $s7nxt-btn-primary-bg, $s7nxt-btn-primary-border, $s7nxt-btn-primary-color-hover, $s7nxt-btn-primary-bg-hover, $s7nxt-btn-primary-border-hover);
+}
+
+%#{$s7nxt-buttons-name}--secondary,
+[role=button].#{$s7nxt-buttons-name}--secondary {
+  @include button-variant-theme($s7nxt-btn-secondary-color, $s7nxt-btn-secondary-bg, $s7nxt-btn-secondary-border, $s7nxt-btn-secondary-color-hover, $s7nxt-btn-secondary-bg-hover, $s7nxt-btn-secondary-border-hover);
+}
+
+// Success appears as green
+%#{$s7nxt-buttons-name}--success,
+[role=button].#{$s7nxt-buttons-name}--success {
+  @include button-variant-theme($s7nxt-btn-success-color, $s7nxt-btn-success-bg, $s7nxt-btn-success-border, $s7nxt-btn-success-color-hover, $s7nxt-btn-success-bg-hover, $s7nxt-btn-success-border-hover);
+}
+
+// Warning appears as orange
+%#{$s7nxt-buttons-name}--warning,
+[role=button].#{$s7nxt-buttons-name}--warning {
+  @include button-variant-theme($s7nxt-btn-warning-color, $s7nxt-btn-warning-bg, $s7nxt-btn-warning-border, $s7nxt-btn-warning-color-hover, $s7nxt-btn-warning-bg-hover, $s7nxt-btn-warning-border-hover);
+}
+
+// Danger and error appear as red
+%#{$s7nxt-buttons-name}--danger,
+[role=button].#{$s7nxt-buttons-name}--danger {
+  @include button-variant-theme($s7nxt-btn-danger-color, $s7nxt-btn-danger-bg, $s7nxt-btn-danger-border, $s7nxt-btn-danger-color-hover, $s7nxt-btn-danger-bg-hover, $s7nxt-btn-danger-border-hover);
+}
+
+// Danger and error appear as red
+%#{$s7nxt-buttons-name}--white,
+[role=button].#{$s7nxt-buttons-name}--white {
+  @include button-variant-theme($s7nxt-brand-color, #fff, #fff);
+}
+
+
+// Button Sizes
+// --------------------------------------------------
+
+%#{$s7nxt-buttons-name}--lg,
+[role=button].#{$s7nxt-buttons-name}--lg {
+  // line-height: ensure even-numbered height of button next to large input
+  @include button-size-theme($s7nxt-btn-border-radius-large, $s7nxt-btn-font-size-large);
+  font-weight: 700;
+}
+%#{$s7nxt-buttons-name}--sm,
+[role=button].#{$s7nxt-buttons-name}--sm {
+  // line-height: ensure proper height of button next to small input
+  @include button-size-theme($s7nxt-btn-border-radius-small, $s7nxt-btn-font-size-medium);
+}
+%#{$s7nxt-buttons-name}--xs,
+[role=button].#{$s7nxt-buttons-name}--xs {
+  @include button-size-theme($s7nxt-btn-border-radius-small, $s7nxt-btn-font-size-small);
+}
+
+// Rounded buttons
+%#{$s7nxt-buttons-name}--rounded,
+[role=button].#{$s7nxt-buttons-name}--rounded {
+  border-radius: 50px;
+}

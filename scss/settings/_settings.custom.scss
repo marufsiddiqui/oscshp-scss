@@ -1,0 +1,449 @@
+$s7nxt-base-line-height: $inuit-base-line-height !default;
+$s7nxt-base-spacing-unit: $inuit-base-spacing-unit !default;
+$s7nxt-base-spacing-unit--tiny: $inuit-base-spacing-unit--small / 2 !default;
+$s7nxt-base-spacing-unit--small: $inuit-base-spacing-unit--small !default;
+$s7nxt-base-spacing-unit--medium: $inuit-base-spacing-unit * 0.75 !default;
+$s7nxt-base-spacing-unit--large: $inuit-base-spacing-unit * 2 !default;
+// The gutter for our grid layout
+$s7nxt-layout-gutter: $inuit-base-spacing-unit !default;
+$s7nxt-layout-gutter--medium: $s7nxt-base-spacing-unit--medium !default;
+$s7nxt-layout-gutter--small: $s7nxt-base-spacing-unit--small !default;
+
+// Number of grid widths/columns we want to have
+$s7nxt-widths-columns: (
+  1,
+  2,
+  3,
+  4,
+  5,
+) !default;
+
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Medium screen / desktop
+$s7nxt-screen-md-min:              45em !default;
+
+// Large screen / wide desktop
+$s7nxt-screen-lg-min:              63em !default;
+
+// So media queries don't overlap when required, provide a maximum
+$s7nxt-screen-sm-max:              ($s7nxt-screen-md-min - 1) !default;
+$s7nxt-screen-md-max:              ($s7nxt-screen-lg-min - 1) !default;
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$s7nxt-enable-rounded:            true !default;
+$s7nxt-enable-shadows:            false !default;
+$s7nxt-enable-gradients:          false !default;
+$s7nxt-enable-transitions:        true !default;
+$s7nxt-enable-hover-media-query:  false !default;
+$s7nxt-enable-grid-classes:       true !default;
+$s7nxt-enable-print-styles:       true !default;
+
+
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+$s7nxt-grid-float-breakpoint:     $s7nxt-screen-md-min !default; // duplicated from _inuit.scss! TODO: find a better solution
+//** Point at which the navbar begins collapsing.
+$s7nxt-grid-float-breakpoint-max: ($s7nxt-grid-float-breakpoint - 1) !default;
+
+// Font family
+$s7nxt-font-family: 'Source Sans Pro', sans-serif !default;
+$s7nxt-font-family-headings: $s7nxt-font-family !default;
+
+// Font Sizes
+$s7nxt-enable-fluid-type: false !default;
+
+// Range of breakpoints for fluid font sizes
+$s7nxt-fluid-type-min-vw: 380px !default;
+$s7nxt-fluid-type-max-vw: 1600px !default;
+
+$s7nxt-font-size-min: 14px !default;
+
+$s7nxt-font-size--tiny: ($inuit-base-font-size - 4px) !default;
+$s7nxt-font-size--small: ($inuit-base-font-size - 2px) !default;
+$s7nxt-font-size--medium: ($inuit-base-font-size - 2px) !default;
+$s7nxt-font-size: $inuit-base-font-size !default; // 18px
+$s7nxt-font-size--large: ($inuit-base-font-size + 4px) !default;
+$s7nxt-font-size--larger: ($inuit-base-font-size + 4px) !default;
+$s7nxt-font-size--x-large: ($inuit-base-font-size + 10px) !default;
+$s7nxt-font-size--hero: 90px !default;
+
+// New
+$s7nxt-font-size-base: (($s7nxt-font-size / $inuit-base-font-size) * 1rem) !default;
+$s7nxt-font-size-lg:   (($s7nxt-font-size--large / $inuit-base-font-size) * 1.25rem) !default;
+$s7nxt-font-size-sm:   (($s7nxt-font-size--small / $inuit-base-font-size) * .875rem) !default;
+$s7nxt-font-size-xs:   (($s7nxt-font-size--tiny / $inuit-base-font-size) * .75rem) !default;
+
+
+// Headings
+$s7nxt-modular-scale-value: 1.333 !default;
+$_mod_1: $s7nxt-modular-scale-value;
+$s7nxt-modular-scale-value-mobile: 1.15 !default;
+$_mod_2: $s7nxt-modular-scale-value-mobile;
+
+// Predefine the variables below in order to alter and enable specific features.
+// Mobile Heading Sizes
+$s7nxt-heading-size-mobile-1:  $s7nxt-font-size-min * $_mod_2 * $_mod_2 * $_mod_2 * $_mod_2 !default;
+$s7nxt-heading-size-mobile-2:  $s7nxt-font-size-min * $_mod_2 * $_mod_2 * $_mod_2 !default;
+$s7nxt-heading-size-mobile-3:  $s7nxt-font-size-min * $_mod_2 * $_mod_2 !default;
+$s7nxt-heading-size-mobile-4:  $s7nxt-font-size-min * $_mod_2 !default;
+$s7nxt-heading-size-mobile-5:  $s7nxt-font-size-min !default;
+$s7nxt-heading-size-mobile-6:  $s7nxt-font-size-min !default;
+
+// Max Heading Font Sizes
+$s7nxt-heading-size-1:  $inuit-base-font-size * $_mod_1 * $_mod_1 * $_mod_1 * $_mod_1 !default;
+$s7nxt-heading-size-2:  $inuit-base-font-size * $_mod_1 * $_mod_1 * $_mod_1 !default;
+$s7nxt-heading-size-3:  $inuit-base-font-size * $_mod_1 * $_mod_1 !default;
+$s7nxt-heading-size-4:  $inuit-base-font-size * $_mod_1 !default;
+$s7nxt-heading-size-5:  $inuit-base-font-size !default;
+$s7nxt-heading-size-6:  $inuit-base-font-size !default;
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color for `<body>`.
+$s7nxt-body-bg:               #fff !default;
+//** Global text color on `<body>`.
+$s7nxt-text-color:            $s7nxt-blue !default;
+
+//** Global textual link color.
+$s7nxt-link-color:            $s7nxt-brand-color !default;
+$s7nxt-link-active-color:     #fff !default;
+$s7nxt-link-active-bg-color:  $s7nxt-link-color !default;
+//** Link hover color set via `darken()` function.
+$s7nxt-link-hover-color:      $s7nxt-link-active-color !default;
+$s7nxt-link-hover-bg-color:   $s7nxt-link-active-bg-color !default;
+//** Link hover decoration.
+$s7nxt-link-hover-decoration: underline !default;
+
+
+//== Components
+//
+//## Define common padding and border radius sizes and more. Values based on 14px text and 1.428 line-height (~20px to start).
+
+$s7nxt-padding-base-vertical:     7px !default;
+$s7nxt-padding-base-horizontal:   20px !default;
+
+$s7nxt-padding-large-vertical:    22px !default;
+$s7nxt-padding-large-horizontal:  32px !default;
+
+$s7nxt-padding-small-vertical:    5px !default;
+$s7nxt-padding-small-horizontal:  16px !default;
+
+$s7nxt-padding-xs-vertical:       1px !default;
+$s7nxt-padding-xs-horizontal:     8px !default;
+
+$s7nxt-line-height:               1.4 !default;
+$s7nxt-line-height-large:         1.3333333 !default; // extra decimals for Win 8.1 Chrome
+$s7nxt-line-height-small:         1.5 !default;
+
+
+// New
+$s7nxt-line-height-lg:         (4 / 3) !default;
+$s7nxt-line-height-sm:         1.5 !default;
+
+$s7nxt-border-width: 1px !default;
+
+// @deprecated
+$s7nxt-border-radius-base:        4px !default;
+$s7nxt-border-radius-large:       6px !default;
+$s7nxt-border-radius-small:       3px !default;
+
+// New
+$s7nxt-border-radius:             .25rem !default;
+$s7nxt-border-radius-lg:          .3rem !default;
+$s7nxt-border-radius-sm:          .2rem !default;
+
+//** Global color for active items (e.g., navs or dropdowns).
+$s7nxt-component-active-color:    #fff !default;
+//** Global background color for active items (e.g., navs or dropdowns).
+$s7nxt-component-active-bg:       $s7nxt-brand-color !default;
+
+
+//-- Z-index master list
+//
+// Warning: Avoid customizing these values. They're used for a bird's eye view
+// of components dependent on the z-axis and are designed to all work together.
+//
+// Note: These variables are not generated into the Customizer.
+
+$s7nxt-zindex-navbar:            1000 !default;
+$s7nxt-zindex-dropdown:          1000 !default;
+$s7nxt-zindex-popover:           1060 !default;
+$s7nxt-zindex-tooltip:           1070 !default;
+$s7nxt-zindex-navbar-fixed:      1030 !default;
+$s7nxt-zindex-modal-background:  1040 !default;
+$s7nxt-zindex-modal:             1050 !default;
+$s7nxt-zindex-statusbar:         1035 !default;
+
+
+//== Forms
+//
+//##
+
+//** Disabled cursor for form controls and buttons.
+$s7nxt-cursor-disabled:                not-allowed !default;
+
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+
+$s7nxt-state-success-text:             #3c763d !default;
+$s7nxt-state-success-bg:               #dff0d8 !default;
+$s7nxt-state-success-border:           darken(adjust-hue($s7nxt-state-success-bg, -10), 5%) !default;
+
+$s7nxt-state-info-text:                #31708f !default;
+$s7nxt-state-info-bg:                  #d9edf7 !default;
+$s7nxt-state-info-border:              darken(adjust-hue($s7nxt-state-info-bg, -10), 7%) !default;
+
+$s7nxt-state-warning-text:             #8a6d3b !default;
+$s7nxt-state-warning-bg:               #fcf8e3 !default;
+$s7nxt-state-warning-border:           darken(adjust-hue($s7nxt-state-warning-bg, -10), 5%) !default;
+
+$s7nxt-state-danger-text:              #a94442 !default;
+$s7nxt-state-danger-bg:                #f2dede !default;
+$s7nxt-state-danger-border:            darken(adjust-hue($s7nxt-state-danger-bg, -10), 5%) !default;
+
+// New
+$s7nxt-brand-success:             #5cb85c !default;
+$s7nxt-brand-info:                #5bc0de !default;
+$s7nxt-brand-warning:             #f0ad4e !default;
+$s7nxt-brand-danger:              #d9534f !default;
+$s7nxt-brand-inverse:             #292b2c !default;
+
+
+
+// Alerts & Status
+//
+// Define alert colors, border radius, and padding.
+
+$s7nxt-alert-padding:               $s7nxt-base-spacing-unit--small !default;
+$s7nxt-alert-border-radius:         0 !default;
+$s7nxt-alert-link-font-weight:      bold !default;
+$s7nxt-alert-border-width:          1px !default;
+
+$s7nxt-alert-success-bg:            $s7nxt-state-success-bg !default;
+$s7nxt-alert-success-text:          $s7nxt-state-success-text !default;
+$s7nxt-alert-success-border:        $s7nxt-state-success-border !default;
+
+$s7nxt-alert-info-bg:               $s7nxt-state-info-bg !default;
+$s7nxt-alert-info-text:             $s7nxt-state-info-text !default;
+$s7nxt-alert-info-border:           $s7nxt-state-info-border !default;
+
+$s7nxt-alert-warning-bg:            $s7nxt-state-warning-bg !default;
+$s7nxt-alert-warning-text:          $s7nxt-state-warning-text !default;
+$s7nxt-alert-warning-border:        $s7nxt-state-warning-border !default;
+
+$s7nxt-alert-danger-bg:             $s7nxt-state-danger-bg !default;
+$s7nxt-alert-danger-text:           $s7nxt-state-danger-text !default;
+$s7nxt-alert-danger-border:         $s7nxt-state-danger-border !default;
+
+// Status
+$s7nxt-status-padding:               $s7nxt-alert-padding !default;
+$s7nxt-status-border-radius:         $s7nxt-alert-border-radius !default;
+$s7nxt-status-link-font-weight:      $s7nxt-alert-link-font-weight !default;
+$s7nxt-status-border-width:          $s7nxt-alert-border-width !default;
+
+$s7nxt-status-success-bg:            $s7nxt-alert-success-bg !default;
+$s7nxt-status-success-text:          $s7nxt-alert-success-text !default;
+$s7nxt-status-success-border:        $s7nxt-alert-success-border !default;
+
+$s7nxt-status-info-bg:               $s7nxt-alert-info-bg !default;
+$s7nxt-status-info-text:             $s7nxt-alert-info-text !default;
+$s7nxt-status-info-border:           $s7nxt-alert-info-border !default;
+
+$s7nxt-status-warning-bg:            $s7nxt-alert-warning-bg !default;
+$s7nxt-status-warning-text:          $s7nxt-alert-warning-text !default;
+$s7nxt-status-warning-border:        $s7nxt-alert-warning-border !default;
+
+$s7nxt-status-danger-bg:             $s7nxt-alert-danger-bg !default;
+$s7nxt-status-danger-text:           $s7nxt-alert-danger-text !default;
+$s7nxt-status-danger-border:         $s7nxt-alert-danger-border !default;
+
+// Close
+
+$s7nxt-close-font-weight:           bold !default;
+$s7nxt-close-color:                 #000 !default;
+$s7nxt-close-text-shadow:           0 1px 0 #fff !default;
+
+
+//== Badges
+//
+//##
+
+$s7nxt-badge-color:                 #fff !default;
+//** Linked badge text color on hover
+$s7nxt-badge-link-hover-color:      #fff !default;
+$s7nxt-badge-bg:                    #999 !default;
+
+//** Badge text color in active nav link
+$s7nxt-badge-active-color:          $s7nxt-link-color !default;
+//** Badge background color in active nav link
+$s7nxt-badge-active-bg:             #fff !default;
+
+$s7nxt-badge-font-weight:           bold !default;
+$s7nxt-badge-line-height:           1 !default;
+$s7nxt-badge-border-radius:         10px !default;
+
+
+// Forms
+$s7nxt-input-padding-x:                .75rem !default;
+$s7nxt-input-padding-y:                .5rem !default;
+$s7nxt-input-line-height:              1.25 !default;
+
+$s7nxt-input-bg:                       #fff !default;
+$s7nxt-input-bg-disabled:              $s7nxt-gray-lighter !default;
+
+$s7nxt-input-color:                    $s7nxt-text-color !default;
+$s7nxt-input-border:                   #ccc !default; // @deprecated, use $s7nxt-input-border-color
+$s7nxt-input-border-color:             #ccc !default;
+$s7nxt-input-btn-border-width:         $s7nxt-border-width !default; // For form controls and buttons
+$s7nxt-input-box-shadow:               inset 0 1px 1px rgba(#000, .075) !default;
+
+$s7nxt-input-border-radius:            $s7nxt-border-radius !default;
+$s7nxt-input-border-radius-lg:         $s7nxt-border-radius-lg !default;
+$s7nxt-input-border-radius-sm:         $s7nxt-border-radius-sm !default;
+
+$s7nxt-input-bg-focus:                 $s7nxt-input-bg !default;
+$s7nxt-input-border-focus:             lighten($s7nxt-brand-color, 25%) !default;
+$s7nxt-input-box-shadow-focus:         $s7nxt-input-box-shadow, rgba($s7nxt-input-border-focus, .6) !default;
+$s7nxt-input-color-focus:              $s7nxt-input-color !default;
+
+$s7nxt-input-color-placeholder:        $s7nxt-gray !default;
+
+$s7nxt-input-padding-x-sm:             .5rem !default;
+$s7nxt-input-padding-y-sm:             .25rem !default;
+
+$s7nxt-input-padding-x-lg:             1.5rem !default;
+$s7nxt-input-padding-y-lg:             .75rem !default;
+
+$s7nxt-input-height:                   (($s7nxt-font-size-base * $s7nxt-input-line-height) + ($s7nxt-input-padding-y * 2)) !default;
+$s7nxt-input-height-lg:                (($s7nxt-font-size-lg * $s7nxt-line-height-lg) + ($s7nxt-input-padding-y-lg * 2)) !default;
+$s7nxt-input-height-sm:                (($s7nxt-font-size-sm * $s7nxt-line-height-sm) + ($s7nxt-input-padding-y-sm * 2)) !default;
+
+$s7nxt-input-transition:               border-color ease-in-out .15s, box-shadow ease-in-out .15s !default;
+
+$s7nxt-form-text-margin-top:     .25rem !default;
+$s7nxt-form-feedback-margin-top: $s7nxt-form-text-margin-top !default;
+
+$s7nxt-form-check-margin-bottom:  .5rem !default;
+$s7nxt-form-check-input-gutter:   1.25rem !default;
+$s7nxt-form-check-input-margin-y: .25rem !default;
+$s7nxt-form-check-input-margin-x: .25rem !default;
+
+$s7nxt-form-check-inline-margin-x: .75rem !default;
+
+$s7nxt-form-group-margin-bottom:       1rem !default;
+
+$s7nxt-input-group-addon-bg:           $s7nxt-gray-lighter !default;
+$s7nxt-input-group-addon-border-color: $s7nxt-input-border-color !default;
+
+$s7nxt-cursor-disabled:                not-allowed !default;
+
+$s7nxt-custom-control-gutter:   1.5rem !default;
+$s7nxt-custom-control-spacer-x: 1rem !default;
+$s7nxt-custom-control-spacer-y: .25rem !default;
+
+$s7nxt-custom-control-indicator-size:       1rem !default;
+$s7nxt-custom-control-indicator-bg:         #ddd !default;
+$s7nxt-custom-control-indicator-bg-size:    50% 50% !default;
+$s7nxt-custom-control-indicator-box-shadow: inset 0 .25rem .25rem rgba(#000, .1) !default;
+
+$s7nxt-custom-control-disabled-cursor:             $s7nxt-cursor-disabled !default;
+$s7nxt-custom-control-disabled-indicator-bg:       $s7nxt-gray-lighter !default;
+$s7nxt-custom-control-disabled-description-color:  $s7nxt-gray-light !default;
+
+$s7nxt-custom-control-checked-indicator-color:      #fff !default;
+$s7nxt-custom-control-checked-indicator-bg:         $s7nxt-brand-color !default;
+$s7nxt-custom-control-checked-indicator-box-shadow: none !default;
+
+$s7nxt-custom-control-focus-indicator-box-shadow: 0 0 0 1px $inuit-base-background-color, 0 0 0 3px $s7nxt-brand-color !default;
+
+$s7nxt-custom-control-active-indicator-color:      #fff !default;
+$s7nxt-custom-control-active-indicator-bg:         lighten($s7nxt-brand-color, 35%) !default;
+$s7nxt-custom-control-active-indicator-box-shadow: none !default;
+
+$s7nxt-custom-checkbox-radius: $s7nxt-border-radius !default;
+$s7nxt-custom-checkbox-checked-icon: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$s7nxt-custom-control-checked-indicator-color}' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3E%3C/svg%3E"), "#", "%23") !default;
+
+$s7nxt-custom-checkbox-indeterminate-bg: $s7nxt-brand-color !default;
+$s7nxt-custom-checkbox-indeterminate-indicator-color: $s7nxt-custom-control-checked-indicator-color !default;
+$s7nxt-custom-checkbox-indeterminate-icon: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='#{$s7nxt-custom-checkbox-indeterminate-indicator-color}' d='M0 2h4'/%3E%3C/svg%3E"), "#", "%23") !default;
+$s7nxt-custom-checkbox-indeterminate-box-shadow: none !default;
+
+$s7nxt-custom-radio-radius: 50% !default;
+$s7nxt-custom-radio-checked-icon: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3E%3Ccircle r='3' fill='#{$s7nxt-custom-control-checked-indicator-color}'/%3E%3C/svg%3E"), "#", "%23") !default;
+
+$s7nxt-custom-select-padding-x:          .75rem  !default;
+$s7nxt-custom-select-padding-y:          .375rem !default;
+$s7nxt-custom-select-indicator-padding:   1rem !default; // Extra padding to account for the presence of the background-image based indicator
+$s7nxt-custom-select-line-height:         $s7nxt-input-line-height !default;
+$s7nxt-custom-select-color:               $s7nxt-input-color !default;
+$s7nxt-custom-select-disabled-color:      $s7nxt-gray-light !default;
+$s7nxt-custom-select-bg:            #fff !default;
+$s7nxt-custom-select-disabled-bg:   $s7nxt-gray-lighter !default;
+$s7nxt-custom-select-bg-size:       8px 10px !default; // In pixels because image dimensions
+$s7nxt-custom-select-indicator-color: #333 !default;
+$s7nxt-custom-select-indicator:     str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='#{$s7nxt-custom-select-indicator-color}' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E"), "#", "%23") !default;
+$s7nxt-custom-select-border-width:  $s7nxt-input-btn-border-width !default;
+$s7nxt-custom-select-border-color:  $s7nxt-input-border-color !default;
+$s7nxt-custom-select-border-radius: $s7nxt-border-radius !default;
+
+$s7nxt-custom-select-focus-border-color: lighten($s7nxt-brand-color, 25%) !default;
+$s7nxt-custom-select-focus-box-shadow:   inset 0 1px 2px rgba(#000, .075), 0 0 5px rgba($s7nxt-custom-select-focus-border-color, .5) !default;
+
+$s7nxt-custom-select-sm-font-size:  75% !default;
+
+$s7nxt-custom-file-height:           2.5rem !default;
+$s7nxt-custom-file-width:            14rem !default;
+$s7nxt-custom-file-focus-box-shadow: 0 0 0 .075rem #fff, 0 0 0 .2rem $s7nxt-brand-color !default;
+
+$s7nxt-custom-file-padding-x:     .5rem !default;
+$s7nxt-custom-file-padding-y:     1rem !default;
+$s7nxt-custom-file-line-height:   1.5 !default;
+$s7nxt-custom-file-color:         $s7nxt-gray !default;
+$s7nxt-custom-file-bg:            #fff !default;
+$s7nxt-custom-file-border-width:  $s7nxt-border-width !default;
+$s7nxt-custom-file-border-color:  $s7nxt-input-border-color !default;
+$s7nxt-custom-file-border-radius: $s7nxt-border-radius !default;
+$s7nxt-custom-file-box-shadow:    inset 0 .2rem .4rem rgba(#000, .05) !default;
+$s7nxt-custom-file-button-color:  $s7nxt-custom-file-color !default;
+$s7nxt-custom-file-button-bg:     $s7nxt-gray-lighter !default;
+$s7nxt-custom-file-text: (
+  placeholder: (
+    en: "Choose file..."
+  ),
+  button-label: (
+    en: "Browse"
+  )
+) !default;
+
+
+// Form validation icons
+$s7nxt-form-icon-success-color: $s7nxt-brand-success !default;
+$s7nxt-form-icon-success: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$s7nxt-form-icon-success-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3E%3C/svg%3E"), "#", "%23") !default;
+
+$s7nxt-form-icon-warning-color: $s7nxt-brand-warning !default;
+$s7nxt-form-icon-warning: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath fill='#{$s7nxt-form-icon-warning-color}' d='M4.4 5.324h-.8v-2.46h.8zm0 1.42h-.8V5.89h.8zM3.76.63L.04 7.075c-.115.2.016.425.26.426h7.397c.242 0 .372-.226.258-.426C6.726 4.924 5.47 2.79 4.253.63c-.113-.174-.39-.174-.494 0z'/%3E%3C/svg%3E"), "#", "%23") !default;
+
+$s7nxt-form-icon-danger-color: $s7nxt-brand-danger !default;
+$s7nxt-form-icon-danger: str-replace(url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='#{$s7nxt-form-icon-danger-color}' viewBox='-2 -2 7 7'%3E%3Cpath stroke='#{$s7nxt-form-icon-danger-color}' d='M0 0l3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E"), "#", "%23") !default;
+
+
+
+// @deprecated
+$s7nxt-legend-color:                   $s7nxt-gray-dark !default;
+// @deprecated
+$s7nxt-legend-border-color:            #e5e5e5 !default;
+
+
+// Input group
+$s7nxt-input-btn-border-width:         1px !default;

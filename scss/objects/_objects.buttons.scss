@@ -1,0 +1,100 @@
+/*------------------------------------*\
+    #Buttons
+\*------------------------------------*/
+
+$s7nxt-buttons-name: "o-btn" !default;
+
+//== Settings
+//
+//## For each of Bootstrap's buttons, define text, background and border color.
+
+$s7nxt-btn-font-weight:                normal !default;
+
+// Base styles
+// --------------------------------------------------
+
+%#{$s7nxt-buttons-name},
+[role=button].#{$s7nxt-buttons-name} {
+    @include button-size($s7nxt-padding-base-vertical, $s7nxt-padding-base-horizontal, $s7nxt-base-line-height);
+    display: inline-block;
+    margin-bottom: 0; // For input[role=button].#{$s7nxt-buttons-name}
+    font-weight: $s7nxt-btn-font-weight;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    white-space: nowrap;
+    user-select: none;
+
+    &:active,
+    &.active {
+        outline: 0;
+    }
+
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: $s7nxt-cursor-disabled;
+    }
+
+    // [converter] extracted a& to a[role=button].#{$s7nxt-buttons-name}
+}
+
+a[role=button].#{$s7nxt-buttons-name} {
+    &[disabled],
+    fieldset[disabled] & {
+        pointer-events: none; // Future-proof disabling of clicks on `<a>` elements
+    }
+}
+
+
+// Button Sizes
+// --------------------------------------------------
+
+%#{$s7nxt-buttons-name}--lg,
+[role=button].#{$s7nxt-buttons-name}--lg {
+    // line-height: ensure even-numbered height of button next to large input
+    @include button-size($s7nxt-padding-large-vertical, $s7nxt-padding-large-horizontal, $s7nxt-line-height-large);
+}
+
+%#{$s7nxt-buttons-name}--sm,
+[role=button].#{$s7nxt-buttons-name}--sm {
+    // line-height: ensure proper height of button next to small input
+    @include button-size($s7nxt-padding-small-vertical, $s7nxt-padding-small-horizontal, $s7nxt-line-height-small);
+}
+
+%#{$s7nxt-buttons-name}--xs,
+[role=button].#{$s7nxt-buttons-name}--xs {
+    @include button-size($s7nxt-padding-xs-vertical, $s7nxt-padding-xs-horizontal, $s7nxt-line-height-small);
+}
+
+
+// Block button
+// --------------------------------------------------
+
+%#{$s7nxt-buttons-name}--block,
+[role=button].#{$s7nxt-buttons-name}--block {
+    display: block;
+    width: 100%;
+}
+
+// Vertically space out multiple block buttons
+[role=button].#{$s7nxt-buttons-name}--block + [role=button].#{$s7nxt-buttons-name}--block {
+    margin-top: 5px;
+}
+
+// Specificity overrides
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    &[role=button].#{$s7nxt-buttons-name}--block {
+        width: 100%;
+    }
+}
+
+// Responsive buttons
+%#{$s7nxt-buttons-name}--responsive,
+[role=button].#{$s7nxt-buttons-name}--responsive {
+    word-wrap: break-word;
+    white-space: normal !important;
+}

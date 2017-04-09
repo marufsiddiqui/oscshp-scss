@@ -1,0 +1,36 @@
+$s7nxt-close-name: "o-close" !default;
+
+@if ($s7nxt-enable-close == true) {
+
+    .#{$s7nxt-close-name} {
+        float: right;
+        font-size: ($s7nxt-font-size * 1.5);
+        font-weight: $s7nxt-close-font-weight;
+        line-height: 1;
+        color: $s7nxt-close-color;
+        text-shadow: $s7nxt-close-text-shadow;
+        opacity: .4;
+
+        @include hover-focus {
+            color: $s7nxt-close-color;
+            text-decoration: none;
+            cursor: pointer;
+            opacity: .8;
+        }
+    }
+
+    // Additional properties for button version
+    // iOS requires the button element instead of an anchor tag.
+    // If you want the anchor version, it requires `href="#"`.
+    // See https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+    // scss-lint:disable QualifyingElement
+    button.o-close {
+        padding: 0;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        -webkit-appearance: none;
+    }
+    // scss-lint:enable QualifyingElement
+}

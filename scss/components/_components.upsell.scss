@@ -1,0 +1,41 @@
+// Upsell compontent
+// -------------------------
+
+// Defaults
+$s7nxt-upsell-name: 'c-upsell' !default;
+
+// Layout defaults
+$s7nxt-upsell-bg: $s7nxt-brand-color !default;
+$s7nxt-upsell-font-color: #fff !default;
+$s7nxt-upsell-font-size: 18px !default;
+$s7nxt-upsell-line-height: 1.6 !default;
+$s7nxt-upsell-text-align: center !default;
+
+// Button
+$s7nxt-upsell-button-text-align: right !default;
+$s7nxt-upsell-button-font-size: 18px !default;
+
+@if ($s7nxt-enable-upsell == true) {
+
+    .#{$s7nxt-upsell-name} {
+        padding: $s7nxt-base-spacing-unit--small;
+        background-color: $s7nxt-upsell-bg;
+        color: $s7nxt-upsell-font-color;
+
+        &__message {
+            font-weight: bold;
+            text-align: $s7nxt-upsell-text-align;
+            @include s7nxt-font-size($s7nxt-upsell-font-size, $s7nxt-upsell-line-height);
+        }
+
+        &__btn-wrapper {
+            text-align: $s7nxt-upsell-button-text-align;
+        }
+
+        &__button {
+            @include s7nxt-font-size($s7nxt-upsell-button-font-size, auto);
+            font-weight: bold;
+        }
+
+    }
+}

@@ -1,0 +1,201 @@
+$s7nxt-loader-name: 'o-loader' !default;
+
+// default loading icon
+$s7nxt-loader-width: 100px !default;
+$s7nxt-loader-height: 100px !default;
+$s7nxt-loader-position-top: 50% !default;
+$s7nxt-loader-position-left: 50% !default;
+$s7nxt-loader-border-width: 5px !default;
+$s7nxt-loader-color: $s7nxt-brand-color !default;
+$s7nxt-loader-color-default: #cbcbca !default;
+$s7nxt-loader-overlay-bg: #fff !default;
+$s7nxt-loader-overlay-opacity: .9 !default;
+$s7nxt-loader-animation-duration: .7s !default;
+$s7nxt-loader-animation-timing-function: linear !default;
+$s7nxt-loader-animation-iteration-count: infinite !default;
+
+// pulse loader
+$s7nxt-loader-pulse-border-width: 5px !default;
+$s7nxt-loader-pulse-border-color: #fff !default;
+$s7nxt-loader-pulse-width: 52px !default;
+$s7nxt-loader-pulse-height: 52px !default;
+$s7nxt-loader-pulse-position-top: $s7nxt-loader-position-top !default;
+$s7nxt-loader-pulse-position-left: $s7nxt-loader-position-left !default;
+$s7nxt-loader-pulse-overlay-bg: #000 !default;
+$s7nxt-loader-pulse-overlay-opacity: .6 !default;
+$s7nxt-loader-pulse-animation-name: pulsate !default;
+$s7nxt-loader-pulse-animation-duration: 1s !default;
+$s7nxt-loader-pulse-animation-timing-function: ease-out !default;
+$s7nxt-loader-pulse-animation-iteration-count: infinite !default;
+
+
+@if ($s7nxt-enable-loader == true) {
+
+    .#{$s7nxt-loader-name} {
+        position: relative;
+        min-height: $s7nxt-loader-width;
+
+        &::before {
+            position: absolute;
+            top: calc(#{$s7nxt-loader-position-top} - #{($s7nxt-loader-height / 2)});
+            left: calc(#{$s7nxt-loader-position-left} - #{($s7nxt-loader-width / 2)});
+            z-index: 10;
+            display: block;
+            width: $s7nxt-loader-width;
+            height: $s7nxt-loader-height;
+            background-color: transparent;
+            border-top: $s7nxt-loader-border-width solid $s7nxt-loader-color;
+            border-right: $s7nxt-loader-border-width solid $s7nxt-loader-color-default;
+            border-bottom: $s7nxt-loader-border-width solid $s7nxt-loader-color-default;
+            border-left: $s7nxt-loader-border-width solid $s7nxt-loader-color-default;
+            border-radius: 100%;
+            content: '';
+            animation: rotation $s7nxt-loader-animation-duration $s7nxt-loader-animation-iteration-count $s7nxt-loader-animation-timing-function;
+        }
+
+        &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 9;
+            display: block;
+            background-color: $s7nxt-loader-overlay-bg;
+            content: ' ';
+            opacity: $s7nxt-loader-overlay-opacity;
+        }
+
+        &--pulse {
+            position: relative;
+
+            &::before {
+                top: $s7nxt-loader-pulse-position-top;
+                left: $s7nxt-loader-pulse-position-left;
+                z-index: 101;
+                width: $s7nxt-loader-pulse-width;
+                height: $s7nxt-loader-pulse-height;
+                margin-top: -($s7nxt-loader-pulse-height / 2);
+                margin-left: -($s7nxt-loader-pulse-width / 2);
+                background-image: none;
+                border-color: $s7nxt-loader-pulse-border-color;
+                border-style: solid;
+                border-width: $s7nxt-loader-pulse-border-width;
+                border-radius: 50%;
+                opacity: 0;
+                animation: $s7nxt-loader-pulse-animation-name $s7nxt-loader-pulse-animation-duration $s7nxt-loader-pulse-animation-timing-function;
+                animation-iteration-count: $s7nxt-loader-pulse-animation-iteration-count;
+            }
+
+            &::after {
+                z-index: 100;
+                background-color: rgba($s7nxt-loader-pulse-overlay-bg, $s7nxt-loader-pulse-overlay-opacity);
+            }
+        }
+    }
+
+    @keyframes pulsate {
+        0% {
+            opacity: 0;
+            transform: scale(.1);
+        }
+
+        50% {
+          opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(1.2);
+        }
+    }
+}
+
+
+// $s7nxt-spinner-name: 'o-spinner' !default;
+
+// Sample markup
+// <div class="o-spinner">
+//     <div class="o-spinner__wrap">
+//         <div class="o-spinner__loader"></div>
+//         <div class="o-spinner__image"></div>
+//         <div class="loading-message">loadingMessage</div>
+//         <div class="loading-sub-heading">loadingSubHeading</div>
+//     </div>
+// </div>
+
+// // .loading #main {
+// //     opacity: .1;
+// // }
+
+// .#{$s7nxt-spinner-name} {
+//     position: absolute;
+//     z-index: 10;
+//     width: 100%;
+//     height: 100%;
+
+//     &__wrap {
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         width: 200px;
+//         height: 100px;
+//         margin-top: -50px;
+//         margin-left: -100px;
+//     }
+
+//     &__loader,
+//     &__image {
+//         position: absolute;
+//         top: 0;
+//         left: 50%;
+//         width: 100px;
+//         height: 100px;
+//         opacity: 1;
+//     }
+
+//     &__image {
+//         margin: 28px 0 0 -25px;
+//         background: url('https://www.paypalobjects.com/images/checkout/hermes/icon_ot_spin_lock_skinny.png') no-repeat;
+//     }
+
+//     &__loader {
+//         margin: 0 0 0 -55px;
+//         background-color: transparent;
+//         border-top: 5px solid $s7nxt-brand-color;
+//         border-right: 5px solid #cbcbca;
+//         border-bottom: 5px solid #cbcbca;
+//         border-left: 5px solid #cbcbca;
+//         border-radius: 100%;
+//         animation: rotation .7s infinite linear;
+//     }
+
+//     .loading-message {
+//         z-index: 100;
+//         width: 100%;
+//         margin-top: 125px;
+//         text-align: center;
+//         outline: 0;
+//         box-sizing: border-box;
+//     }
+
+//     .loading-sub-heading {
+//         z-index: 100;
+//         width: 150%;
+//         margin-top: 10px;
+//         margin-left: -42px;
+//         text-align: center;
+//         outline: 0;
+//         box-sizing: border-box;
+//     }
+// }
+
+@keyframes rotation {
+    from {
+        transform: rotate(0);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}

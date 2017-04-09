@@ -1,0 +1,109 @@
+/*------------------------------------*\
+    #PAGE
+\*------------------------------------*/
+
+/**
+ * High-, page-level styling.
+ *
+ * 1. Set the default `font-size` and `line-height` for the entire project,
+ *    sourced from our default variables. The `font-size` is calculated to exist
+ *    in ems, the `line-height` is calculated to exist unitlessly.
+ * 2. Force scrollbars to always be visible to prevent awkward ‘jumps’ when
+ *    navigating between pages that do/do not have enough content to produce
+ *    scrollbars naturally.
+ * 3. Ensure the page always fills at least the entire height of the viewport.
+ * 4. Prevent certain mobile browsers from automatically zooming fonts.
+ * 5. Fonts on OSX will look more consistent with other systems that do not
+ *    render text using sub-pixel anti-aliasing.
+ */
+$inuit-base-text-color: $s7nxt-text-color;
+
+html {
+    @if ($s7nxt-enable-fluid-type == false) {
+        font-size: ($inuit-base-font-size / 16px) * 1em; /* [1] */
+    }
+    line-height: $inuit-base-line-height / $inuit-base-font-size; /* [1] */
+    background-color: $inuit-base-background-color;
+    color: $inuit-base-text-color;
+    // overflow-y: scroll; /* [2] */
+    min-height: 100%; /* [3] */
+    -webkit-text-size-adjust: 100%; /* [4] */
+        -ms-text-size-adjust: 100%; /* [4] */
+    -moz-osx-font-smoothing: grayscale; /* [5] */
+     -webkit-font-smoothing: antialiased; /* [5] */
+}
+
+
+// =========================================================================
+//
+//  PRECISE CONTROL OVER RESPONSIVE TYPOGRAPHY FOR SASS
+//  ---------------------------------------------------
+//  Indrek Paas @indrekpaas
+//
+//  Inspired by Mike Riethmuller's Precise control over responsive typography
+//  http://madebymike.com.au/writing/precise-control-responsive-typography/
+//
+//  `strip-unit()` function by Hugo Giraudel
+//
+//  11.08.2016 Remove redundant `&` self-reference
+//  31.03.2016 Remove redundant parenthesis from output
+//  02.10.2015 Add support for multiple properties
+//  24.04.2015 Initial release
+//
+// =========================================================================
+
+// Fluid Typography
+// https://www.smashingmagazine.com/2016/05/fluid-typography/
+
+@if ($s7nxt-enable-fluid-type) {
+
+    html {
+        @include s7nxt-fluid-type(font-size, $s7nxt-fluid-type-min-vw, $s7nxt-fluid-type-max-vw, $s7nxt-font-size-min, $s7nxt-font-size);
+    }
+}
+
+body {
+    font-family: $s7nxt-font-family;
+}
+
+// Only display content to screen readers
+//
+// See: http://a11yproject.com/posts/how-to-hide-content/
+
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+// iOS "clickable elements" fix for role="button"
+//
+// Fixes "clickability" issue (and more generally, the firing of events such as focus as well)
+// for traditionally non-focusable elements with role="button"
+// see https://developer.mozilla.org/en-US/docs/Web/Events/click#Safari_Mobile
+
+[role="button"] {
+  cursor: pointer;
+}
+
+// Responsive images (ensure images don't scale beyond their parents)
+.u-img-responsive {
+  @include img-responsive;
+}
+
+// Hide from screenreaders and browsers
+//
+// Credit: HTML5 Boilerplate
+
+.u-hidden {
+  display: none !important;
+}
+
+iframe {
+  display: block;
+}

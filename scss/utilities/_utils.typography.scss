@@ -1,0 +1,142 @@
+/*------------------------------------*\
+    #Typography utilities
+\*------------------------------------*/
+
+$s7nxt-enable-responsive-typography: true !default;
+$s7nxt-enable-utils-typography: true !default;
+
+@if ($s7nxt-enable-utils-typography == true) {
+
+    // Generic font-size classes
+    %u-fs,
+    .u-fs {
+
+        &--tiny {
+            @include s7nxt-font-size(($s7nxt-font-size--tiny), auto, true);
+        }
+
+        &--small {
+            @include s7nxt-font-size(($s7nxt-font-size--small), auto, true);
+        }
+
+        &--medium {
+            @include s7nxt-font-size(($s7nxt-font-size--medium), auto, true);
+        }
+
+        &--base {
+            @include s7nxt-font-size(($s7nxt-font-size), auto, true);
+        }
+
+        &--large {
+            @include s7nxt-font-size(($s7nxt-font-size--large), auto, true);
+        }
+
+        &--larger {
+            @include s7nxt-font-size(($s7nxt-font-size--larger), auto, true);
+        }
+
+        &--x-large {
+            @include s7nxt-font-size(($s7nxt-font-size--x-large), auto, true);
+        }
+
+        &--hero {
+            @include s7nxt-font-size(($s7nxt-font-size--hero), auto, true);
+        }
+    }
+
+    // Alignment
+    %u-text--center,
+    .u-text--center {
+        text-align: center !important;
+    }
+
+    %u-text--left,
+    .u-text--left {
+        text-align: left !important;
+    }
+
+    %u-text--right,
+    .u-text--right {
+        text-align: right !important;
+    }
+
+    @if ($s7nxt-enable-responsive-typography == true) {
+        @each $breakpoint in $breakpoints {
+
+            $_className: "u-text";
+
+            // Get the name of the breakpoint.
+            $alias: nth($breakpoint, 1);
+
+            @include media-query($alias) {
+
+                .#{$_className}--center\@#{$alias} {
+                    text-align: center !important;
+                }
+
+                .#{$_className}--left\@#{$alias} {
+                    text-align: left !important;
+                }
+
+                .#{$_className}--right\@#{$alias} {
+                    text-align: right !important;
+                }
+            }
+        }
+    }
+
+    // Font variant
+    %u-text--upper,
+    .u-text--upper {
+        text-transform: uppercase !important;
+    }
+    %u-text--lower,
+    .u-text--lower {
+        text-transform: lowercase !important;
+    }
+
+    // Font weight
+    .u-normal {
+        font-weight: 400 !important;
+    }
+    .u-bold {
+        font-weight: 700 !important;
+    }
+
+    // [converter] extracted as `@mixin list-unstyled` for libsass compatibility
+    .u-list--unstyled {
+        @include list-unstyled;
+    }
+
+    // Inline turns list items into inline-block
+    .u-list--inline {
+        @include list-unstyled;
+        margin-left: -5px;
+
+        > li {
+            display: inline-block;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+
+    // Makes indentions and more vertical space between list items, so that it looks like paragraphs
+    .u-list--space {
+        @include list-unstyled;
+
+        li {
+            margin-bottom: $s7nxt-base-spacing-unit--small;
+
+            > ul,
+            > ol {
+                padding-left: $s7nxt-base-spacing-unit;
+                margin-top: $s7nxt-base-spacing-unit--small;
+                list-style: none;
+            }
+        }
+    }
+
+    .u-word-wrap {
+        @include word-wrap();
+    }
+}

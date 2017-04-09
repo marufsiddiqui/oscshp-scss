@@ -1,0 +1,38 @@
+$s7nxt-payment-name: 'c-payment';
+
+@if ($s7nxt-enable-payment == true) {
+
+    .#{$s7nxt-payment-name} {
+
+        &__payment-method {
+
+            background-repeat: no-repeat;
+            background-position: top 8px right 10px;
+            background-size: auto 28px;
+
+            &--creditcard {
+                background-image: url('/images/payment/3_Card_Multicard_horizontal.e60e7d81.jpg');
+            }
+
+            &--paypal {
+                background-image: url('/images/payment/Paypal_2014_logo.116205d0.png');
+            }
+
+            &--sofort {
+                background-image: url('/images/payment/Sofortueberweisung_Logo.f3a91d28.jpg');
+                background-size: auto 22px;
+                background-position: top 12px right 10px;
+            }
+
+            &--vorkasse {
+                background-image: url('/images/payment/vorkasse.f43c2c6d.png');
+            }
+
+            .o-form__check {
+                padding: 6px 0;
+            }
+
+        }
+
+    }
+}

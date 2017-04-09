@@ -1,0 +1,205 @@
+/*------------------------------------*\
+    #Flexbox Grid System
+\*------------------------------------*/
+
+$s7nxt-grid-name: "o-grid" !default;
+
+$s7nxt-grid-gutter        : $s7nxt-layout-gutter !default;
+$s7nxt-grid-gutter--medium: $s7nxt-base-spacing-unit--medium;
+$s7nxt-grid-gutter--small : $s7nxt-layout-gutter--small !default;
+
+// Offsets
+$s7nxt-enable-flexbox-offsets: true !default;
+
+// By default each <code>.#{$s7nxt-grid-name}__cell</code> item has the same widths. If you put 4 <code>.#{$s7nxt-grid-name}__cell</code> container in one <code>.#{$s7nxt-grid-name}</code> parent container the size of each cell will be one fourths = 25%. Here are some examples:
+
+.#{$s7nxt-grid-name},
+%#{$s7nxt-grid-name} {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.#{$s7nxt-grid-name}__cell,
+%#{$s7nxt-grid-name}__cell {
+  flex: 1;
+  min-width: 0;
+}
+
+// Flexbox Widths
+//
+// At the moment the grid is defined in 5 different sizes. You can use class names like <code>.#{$s7nxt-grid-name}--1/3</code> to create a container with one-third of the available widths = 33%.
+
+@include s7nxt-widths($s7nxt-widths-columns);
+
+// Responsive Flexbox Widths
+//
+// At the moment the grid is defined in 5 different sizes. You can use class names like <code>.#{$s7nxt-grid-name}--1/3</code> to create a container with one-third of the available widths = 33%.
+
+// Loop over our breakpoints defined in _settings.responsive.scss
+@each $breakpoint in $breakpoints {
+
+  // Get the name of the breakpoint.
+  $alias: nth($breakpoint, 1);
+
+  @include media-query($alias) {
+
+    // Loop through each of our column sizes and generate its responsive width
+    // classes.
+      $isFlexBox: true;
+      @include s7nxt-widths($s7nxt-widths-columns, \@#{$alias}, $isFlexBox);
+  }
+
+}
+
+// Nested Grids
+
+// Grids with gutters
+//
+// Apply the grid modifier <code>.#{$s7nxt-grid-name}--gutters</code> to the grid container to create gutters (gaps between grid-cell content).
+
+.#{$s7nxt-grid-name}--gutters,
+%#{$s7nxt-grid-name}--gutters {
+  margin: -$s7nxt-grid-gutter 0 $s7nxt-grid-gutter 0-$s7nxt-grid-gutter;
+
+  > .#{$s7nxt-grid-name}__cell {
+    padding: $s7nxt-grid-gutter 0 0 $s7nxt-grid-gutter;
+  }
+}
+.#{$s7nxt-grid-name}--guttersSmall,
+%#{$s7nxt-grid-name}--guttersSmall {
+  margin: -$s7nxt-grid-gutter--small 0 $s7nxt-grid-gutter--small 0-$s7nxt-grid-gutter--medium;
+
+  > .#{$s7nxt-grid-name}__cell {
+    padding: $s7nxt-grid-gutter--small 0 0 $s7nxt-grid-gutter--medium;
+  }
+}
+
+
+// Vertical aligned
+//
+// Sets the
+.#{$s7nxt-grid-name}--vertical {
+    flex-direction: column;
+}
+
+
+// Full-Height with .#{$s7nxt-grid-name}--flexcells
+//
+// Creates full-height boxes depending on the tallest container.
+
+.#{$s7nxt-grid-name}--flexcells > .#{$s7nxt-grid-name}__cell {
+  display: flex;
+}
+
+// Top-Align with .#{$s7nxt-grid-name}--top
+//
+// Puts all flex container to the top.
+
+.#{$s7nxt-grid-name}--top {
+  align-items: flex-start;
+}
+
+// Bottom-Align with .#{$s7nxt-grid-name}--bottom
+//
+// Puts all flex container to the bottom.
+
+.#{$s7nxt-grid-name}--bottom {
+  align-items: flex-end;
+}
+
+// Center-Align with .#{$s7nxt-grid-name}--center
+//
+// This will vertical align all flex container.
+
+.#{$s7nxt-grid-name}--center {
+  align-items: center;
+}
+
+// Justifycenter-Align with .#{$s7nxt-grid-name}--justifycenter
+
+.#{$s7nxt-grid-name}--justifycenter {
+  justify-content: center;
+
+  > .#{$s7nxt-grid-name}__cell {
+    flex: 0 1 auto;
+  }
+}
+
+// Flex-start with .#{$s7nxt-grid-name}__cell--top
+//
+// <code>.#{$s7nxt-grid-name}__cell--top</code> places a single flex item to the top.
+
+.#{$s7nxt-grid-name}__cell--top {
+  align-self: flex-start;
+}
+
+// Flex-end with .#{$s7nxt-grid-name}__cell--bottom
+//
+// <code>.#{$s7nxt-grid-name}__cell--bottom</code> places a single flex item to the bottom.
+
+.#{$s7nxt-grid-name}__cell--bottom {
+  align-self: flex-end;
+}
+
+// Center-align with .#{$s7nxt-grid-name}__cell--center
+//
+// This will vertical center align a single flex container.
+
+.#{$s7nxt-grid-name}__cell--center {
+  align-self: center;
+}
+
+// Autosize with .#{$s7nxt-grid-name}__cell--autosize
+//
+// <code>.#{$s7nxt-grid-name}__cell--autosize</code> will automatically increase the size of a single flex container in relation to its content.
+
+.#{$s7nxt-grid-name}__cell--autosize {
+  flex: none;
+}
+
+// Make grids responsive with .#{$s7nxt-grid-name}__full
+//
+// <code>.#{$s7nxt-grid-name}__full</code> will automatically increase the size of a single flex container in relation to its content.
+
+.#{$s7nxt-grid-name}--full > .#{$s7nxt-grid-name}__cell {
+  flex: 0 0 100%;
+}
+// Loop over our breakpoints defined in _settings.responsive.scss
+@each $breakpoint in $breakpoints {
+
+  // Get the name of the breakpoint.
+  $alias: nth($breakpoint, 1);
+
+  @include media-query($alias) {
+
+    .#{$s7nxt-grid-name}--full\@#{$alias} > .#{$s7nxt-grid-name}__cell {
+      flex: 0 0 100%;
+    }
+  }
+}
+
+
+// Offsets
+@if ($s7nxt-enable-flexbox-offsets == true) {
+  @include s7nxt-offsets($s7nxt-widths-columns);
+
+  // Responsive Offsets
+  // Loop over our breakpoints defined in _settings.responsive.scss
+  @each $breakpoint in $breakpoints {
+
+    // Get the name of the breakpoint.
+    $alias: nth($breakpoint, 1);
+
+    @include media-query($alias) {
+
+      // Loop through each of our column sizes and generate its responsive width
+      // classes.
+        $isFlexBox: true;
+        @include s7nxt-offsets($s7nxt-widths-columns, \@#{$alias});
+    }
+
+  }
+}

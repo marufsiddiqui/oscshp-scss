@@ -1,0 +1,59 @@
+/*------------------------------------*\
+    #Blurbs
+\*------------------------------------*/
+
+// The blurb module is a simple and elegant combination of text and imagery. Blurbs are a great way to showcase small bits of important information, and are often used in rows to display skills or features. Blurb modules can be placed in any column that you create.
+
+$s7nxt-blurb-name: "o-blurb" !default;
+
+@if ($s7nxt-enable-blurbs == true) {
+
+    .#{$s7nxt-blurb-name} {
+        @extend %o-grid;
+        text-align: center;
+
+        &__hd,
+        &__image {
+            margin-bottom: $s7nxt-base-spacing-unit;
+        }
+
+        &__hd,
+        &__imgage,
+        &__description {
+            @extend %o-grid__cell;
+            @extend .o-grid--1\/1;
+        }
+
+        &__heading {
+            margin-bottom: 0;
+            @extend %h2;
+        }
+
+        &__image {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%; /* IE10+11 */
+
+            &--has-badge {
+                position: relative;
+            }
+        }
+
+        &__img {
+            @include img-responsive;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        &__description {
+
+        }
+
+        &__badge {
+
+            &-holder {
+                position: absolute;
+            }
+        }
+    }
+}

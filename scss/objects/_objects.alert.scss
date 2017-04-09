@@ -1,0 +1,79 @@
+/*------------------------------------*\
+    #Alert and status messages
+\*------------------------------------*/
+
+$s7nxt-alert-name: "o-alert" !default;
+
+@if ($s7nxt-enable-alerts == true) {
+
+    %#{$s7nxt-alert-name},
+    .#{$s7nxt-alert-name} {
+        @include border-radius($s7nxt-alert-border-radius);
+        padding: $s7nxt-alert-padding;
+        margin-bottom: $s7nxt-base-spacing-unit;
+        border: $s7nxt-alert-border-width solid transparent;
+
+        // Headings for larger alerts
+        &__heading {
+            // Specified to prevent conflicts of changing $headings-color
+            color: inherit;
+        }
+
+        // Provide class for links that match alerts
+        &__link {
+            font-weight: $s7nxt-alert-link-font-weight;
+        }
+
+        // Dismissible alerts
+        //
+        // Expand the right padding and account for the close button's positioning.
+
+        &--dismissible {
+            padding-right: ($s7nxt-alert-padding + 20px);
+
+            // Adjust close link position
+            .o-close {
+                position: relative;
+                top: -2px;
+                right: -21px;
+                color: inherit;
+            }
+        }
+
+        // Alternate styles
+        //
+        // Generate contextual modifier classes for colorizing the alert.
+
+        &--success {
+            @include alert-variant($s7nxt-alert-success-bg, $s7nxt-alert-success-border, $s7nxt-alert-success-text);
+        }
+        &--info {
+            @include alert-variant($s7nxt-alert-info-bg, $s7nxt-alert-info-border, $s7nxt-alert-info-text);
+        }
+        &--warning {
+            @include alert-variant($s7nxt-alert-warning-bg, $s7nxt-alert-warning-border, $s7nxt-alert-warning-text);
+        }
+        &--danger {
+            @include alert-variant($s7nxt-alert-danger-bg, $s7nxt-alert-danger-border, $s7nxt-alert-danger-text);
+        }
+
+        &--status-message {
+            text-align: center;
+            font-weight: bold;
+            padding: $s7nxt-base-spacing-unit;
+
+            &.#{$s7nxt-alert-name}--success {
+                @include alert-variant($s7nxt-status-success-bg, $s7nxt-status-success-border, $s7nxt-status-success-text);
+            }
+            &.#{$s7nxt-alert-name}--info {
+                @include alert-variant($s7nxt-status-info-bg, $s7nxt-status-info-border, $s7nxt-status-info-text);
+            }
+            &.#{$s7nxt-alert-name}--warning {
+                @include alert-variant($s7nxt-status-warning-bg, $s7nxt-status-warning-border, $s7nxt-status-warning-text);
+            }
+            &.#{$s7nxt-alert-name}--danger {
+                @include alert-variant($s7nxt-status-danger-bg, $s7nxt-status-danger-border, $s7nxt-status-danger-text);
+            }
+        }
+    }
+}

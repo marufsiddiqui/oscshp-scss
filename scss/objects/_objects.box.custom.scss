@@ -1,0 +1,133 @@
+/*------------------------------------*\
+    #Box custom
+\*------------------------------------*/
+
+// Extends inuit.css _objects.box.scss
+
+$s7nxt-box-name:          'o-box' !default;
+$s7nxt-box-color-bg:       white !default;
+$s7nxt-box-border-radius: $s7nxt-border-radius-large !default;
+
+$s7nxt-box-panel-color:          $s7nxt-text-color !default;
+$s7nxt-box-panel-color-bg:       white !default;
+$s7nxt-box-panel-color-headline: $s7nxt-text-color !default;
+
+$s7nxt-box-panel-font-size: 18px !default;
+
+// More link at the bottom
+$s7nxt-box-panel-more-link-color-bg: $s7nxt-brand-color !default;
+$s7nxt-box-panel-more-link-color-bg-hover: lighten($s7nxt-box-panel-more-link-color-bg, 10%) !default;
+
+// Special font size for headline on HLI
+$s7nxt-box-panel-font-size-headline-hli: 46px !default;
+
+
+.#{$s7nxt-box-name} {
+    background-color: $s7nxt-box-color-bg;
+    margin-bottom: $s7nxt-base-spacing-unit--small;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &--rounded {
+        border-radius: $s7nxt-box-border-radius;
+
+        & > .#{$s7nxt-box-name}__hd {
+            border-radius: $s7nxt-box-border-radius $s7nxt-box-border-radius 0 0;
+        }
+    }
+
+    &--border {
+        border-radius: $s7nxt-border-radius-base;
+        border: 1px solid $s7nxt-input-border;
+    }
+
+    &--card {
+        padding-top: $s7nxt-base-spacing-unit--tiny + 2;
+        padding-bottom: $s7nxt-base-spacing-unit--tiny + 2;
+    }
+
+    &--trans {
+        background-color: transparent;
+    }
+
+    // Panels
+    &--panel {
+        position: relative;
+        width: 100%;
+        padding: 0;
+        margin-bottom: $s7nxt-base-spacing-unit;
+        color: $s7nxt-box-panel-color;
+        text-align: center;
+        background-color: $s7nxt-box-panel-color-bg;
+        background-size: cover;
+        text-decoration: none;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        @at-root a#{&} {
+
+            &:hover {
+
+                .#{$s7nxt-box-name}__more {
+                    background-color: $s7nxt-box-panel-more-link-color-bg-hover;
+                }
+            }
+        }
+    }
+
+    &__body {
+        padding: $inuit-box-padding;
+    }
+
+    &__hd {
+        margin-top: 0;
+        margin-bottom: $s7nxt-base-spacing-unit;
+        @include s7nxt-font-size($s7nxt-font-size--larger, 1.4);
+        color: $s7nxt-box-panel-color-headline;
+        font-weight: 400;
+
+        @at-root .c-hli & {
+            @include s7nxt-font-size($s7nxt-box-panel-font-size-headline-hli);
+        }
+    }
+
+    &__more {
+        position: relative;
+        width: 100%;
+        text-align: left;
+        background-color: $s7nxt-box-panel-more-link-color-bg;
+        transition: background-color 300ms ease-out;
+
+        &:hover {
+            background-color: $s7nxt-box-panel-more-link-color-bg-hover;
+        }
+
+        &-link {
+            display: block;
+            padding: 13px 40px 13px $s7nxt-base-spacing-unit;
+            @include s7nxt-font-size($s7nxt-box-panel-font-size, 1.4);
+            text-decoration: underline;
+            font-weight: 700;
+            color: white;
+            text-align: right;
+
+            &:hover {
+                color: white;
+            }
+        }
+
+        &-icon {
+            position: absolute;
+            right: 7px;
+            top: calc(50% - 24px/2 - 2px);
+            > svg {
+                fill: white;
+            }
+
+        }
+    }
+}

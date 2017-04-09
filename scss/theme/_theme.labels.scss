@@ -1,0 +1,46 @@
+//** Default label background color
+$s7nxt-label-default-bg:            $s7nxt-gray !default;
+//** Primary label background color
+$s7nxt-label-brand-bg:              $s7nxt-brand-color !default;
+//** Primary label background color
+$s7nxt-label-primary-bg:            $s7nxt-brand-color--primary !default;
+
+//** Default label text color
+$s7nxt-label-color:                 #fff !default;
+//** Default text color of a linked label
+$s7nxt-label-link-hover-color:      #fff !default;
+
+@if ($s7nxt-enable-theme == true and $s7nxt-enable-labels == true) {
+
+    .#{$s7nxt-label-name} {
+        color: $s7nxt-label-color;
+    }
+
+    // Add hover effects, but only for links
+    a.#{$s7nxt-label-name} {
+        &:hover,
+        &:focus {
+            color: $s7nxt-label-link-hover-color;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+
+    // Colors
+    // Contextual variations (linked labels get darker on :hover)
+    .#{$s7nxt-label-name} {
+
+        &--default {
+            @include label-variant($s7nxt-label-default-bg);
+        }
+
+        &--brand {
+            @include label-variant($s7nxt-label-brand-bg);
+        }
+
+        &--primary {
+            @include label-variant($s7nxt-label-primary-bg);
+        }
+
+    }
+}

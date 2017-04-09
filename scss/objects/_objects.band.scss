@@ -1,0 +1,41 @@
+// #Band
+
+$s7nxt-band-name: 'o-band' !default;
+
+$s7nxt-band-padding-vertical:             40px !default;
+$s7nxt-band-padding-vertical--small:      20px !default;
+$s7nxt-band-padding-vertical--lg:         60px !default;
+
+@if ($s7nxt-enable-band == true) {
+
+    %#{$s7nxt-band-name},
+    .#{$s7nxt-band-name} {
+        @include s7nxt-rem(padding-top, $s7nxt-band-padding-vertical);
+        @include s7nxt-rem(padding-bottom, $s7nxt-band-padding-vertical);
+
+        &:last-of-type:not(.#{$s7nxt-band-name}--top) {
+            border-bottom: 0;
+        }
+
+        &[style*="background-image"] {
+            background-position: 50% 50%;
+            background-size: cover;
+        }
+
+        &--small {
+            @include s7nxt-rem(padding-top, $s7nxt-band-padding-vertical--small);
+            @include s7nxt-rem(padding-bottom, $s7nxt-band-padding-vertical--small);
+        }
+
+        &--lg {
+            @include s7nxt-rem(padding-top, $s7nxt-band-padding-vertical--lg);
+            @include s7nxt-rem(padding-bottom, $s7nxt-band-padding-vertical--lg);
+        }
+
+        &--bg-img {
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    }
+}

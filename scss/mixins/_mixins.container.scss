@@ -1,0 +1,15 @@
+// Centered container element
+@mixin container-fixed($gutter: $s7nxt-layout-gutter) {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left:  ($gutter / 2);
+    padding-right: ($gutter / 2);
+    @extend %clearfix;
+}
+
+// Creates a wrapper for a series of columns
+@mixin make-row($gutter: $s7nxt-layout-gutter) {
+    margin-left:  ceil(($gutter / -2));
+    margin-right: floor(($gutter / -2));
+    @extend %clearfix;
+}

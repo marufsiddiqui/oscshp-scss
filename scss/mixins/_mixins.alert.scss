@@ -1,0 +1,23 @@
+// Alerts
+
+@mixin alert-variant($background, $border, $body-color) {
+    background-color: $background;
+    border-color: $border;
+    color: $body-color;
+
+    hr {
+        border-top-color: darken($border, 5%);
+    }
+    .o-alert__link {
+        color: darken($body-color, 10%);
+    }
+
+    .o-close {
+        color: $body-color;
+    }
+
+    .o-badge {
+        background-color: $body-color;
+        color: $background;
+    }
+}

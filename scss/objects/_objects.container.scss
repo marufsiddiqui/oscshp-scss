@@ -1,0 +1,92 @@
+/*------------------------------------*\
+    #Container
+\*------------------------------------*/
+
+$s7nxt-container-name: "o-container" !default;
+
+//== Container sizes
+//
+//## Define the maximum width of `.container` for different screen sizes.
+
+// Small screen / tablet
+$s7nxt-container-tablet:             720px !default;
+//** For `$screen-sm-min` and up.
+$s7nxt-container-sm:                 $s7nxt-container-tablet !default;
+
+// Medium screen / desktop
+$s7nxt-container-desktop:            960px !default;
+//** For `$screen-md-min` and up.
+$s7nxt-container-md:                 $s7nxt-container-desktop !default;
+
+// Large screen / wide desktop
+$s7nxt-container-large-desktop:      1064px !default;
+//** For `$screen-lg-min` and up.
+$s7nxt-container-lg:                 $s7nxt-container-large-desktop !default;
+
+//** Super narrow
+$s7nxt-container--xs:                (400px - $s7nxt-layout-gutter) !default;
+
+//** Narrow
+$s7nxt-container--narrow:            (720px - $s7nxt-layout-gutter) !default;
+
+//** Narrow
+$s7nxt-container--medium:            (860px - $s7nxt-layout-gutter) !default;
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+%#{$s7nxt-container-name},
+.#{$s7nxt-container-name} {
+    @include container-fixed;
+
+    @include media-query(sm) {
+        max-width: $s7nxt-container-sm;
+    }
+
+    @include media-query(md) {
+        max-width: $s7nxt-container-md;
+    }
+
+    @include media-query(lg) {
+        max-width: $s7nxt-container-lg;
+    }
+
+    &.#{$s7nxt-container-name}--medium {
+
+        @include media-query(md-and-up) {
+            &\@md-and-up {
+                max-width: $s7nxt-container--medium;
+            }
+        }
+    }
+
+    &.#{$s7nxt-container-name}--narrow {
+
+        @include media-query(md-and-up) {
+            &\@md-and-up {
+                max-width: $s7nxt-container--narrow;
+            }
+        }
+    }
+
+    &.#{$s7nxt-container-name}--xs {
+
+        @include media-query(md-and-up) {
+            &\@md-and-up {
+                max-width: $s7nxt-container--xs;
+            }
+        }
+    }
+}
+
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+
+%#{$s7nxt-container-name}-fluid,
+.#{$s7nxt-container-name}-fluid {
+    @include container-fixed;
+}

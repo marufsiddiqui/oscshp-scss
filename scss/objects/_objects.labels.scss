@@ -1,0 +1,39 @@
+/*------------------------------------*\
+    #Labels
+\*------------------------------------*/
+
+$s7nxt-label-name: "o-label" !default;
+
+@if ($s7nxt-enable-labels == true) {
+
+    .#{$s7nxt-label-name} {
+        display: inline;
+        padding: .2em .6em .3em;
+        font-size: 75%;
+        font-weight: bold;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+
+        // [converter] extracted a& to a.o-label
+
+        // Empty labels collapse automatically (not available in IE8)
+        &:is-empty {
+            display: none;
+        }
+
+        // Quick fix for labels in buttons
+        .o-btn & {
+            position: relative;
+            top: -1px;
+        }
+
+        // Responsive buttons
+        &--responsive {
+            white-space: normal !important;
+            word-wrap: break-word;
+        }
+    }
+}

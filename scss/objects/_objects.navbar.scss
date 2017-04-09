@@ -1,0 +1,489 @@
+/*------------------------------------*\
+    #Navbars
+\*------------------------------------*/
+
+$s7nxt-navbar-name: "o-navbar" !default;
+
+// Basics of a navbar
+$s7nxt-navbar-height:                     50px !default;
+$s7nxt-navbar-height-mobile:              $s7nxt-navbar-height !default;
+$s7nxt-navbar-margin-bottom:              $s7nxt-base-line-height !default;
+$s7nxt-navbar-border-radius:              $s7nxt-border-radius-base !default;
+$s7nxt-navbar-link-border-bottom-width:   0px !default;
+$s7nxt-navbar-padding-horizontal:         floor(($s7nxt-layout-gutter / 2)) !default;
+$s7nxt-navbar-padding-vertical:           (($s7nxt-navbar-height - $s7nxt-base-line-height - $s7nxt-navbar-link-border-bottom-width) / 2) !default;
+$s7nxt-navbar-collapse-max-height:        340px !default;
+$s7nxt-navbar-collapse-max-height-mobile: 200px !default;
+$s7nxt-navbar-brand-has-visual-teaser-width: 230px !default;
+
+$s7nxt-navbar-breakpoints-settings: () !default;
+$s7nxt-navbar-breakpoints: map-merge($breakpoints, $s7nxt-navbar-breakpoints-settings) !default;
+
+
+// Wrapper and base class
+//
+// Provide a static navbar from which we expand to create full-width, fixed, and
+// other navbar variations.
+
+@if ($s7nxt-enable-navbar == true) {
+
+    %#{$s7nxt-navbar-name},
+    .#{$s7nxt-navbar-name} {
+        position: relative;
+        min-height: $s7nxt-navbar-height-mobile; // Ensure a navbar always shows (e.g., without a .#{$s7nxt-navbar-name}-brand in collapsed mode)
+        margin-bottom: $s7nxt-navbar-margin-bottom;
+        border: 1px solid transparent;
+
+        // Prevent floats from breaking the navbar
+        @extend %clearfix;
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            border-radius: $s7nxt-navbar-border-radius;
+            min-height: $s7nxt-navbar-height;
+        }
+    }
+
+
+    // Navbar heading
+    //
+    // Groups `.#{$s7nxt-navbar-name}-brand` and `.#{$s7nxt-navbar-name}__toggle` into a single component for easy
+    // styling of responsive aspects.
+
+    %#{$s7nxt-navbar-name}__header,
+    .#{$s7nxt-navbar-name}__header {
+        @extend %clearfix;
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            float: left;
+        }
+
+        @at-root .hasVisualTeaser & {
+
+            @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+                float: none;
+            }
+        }
+    }
+
+
+    // Navbar collapse (body)
+    //
+    // Group your navbar content into this for easy collapsing and expanding across
+    // various device sizes. By default, this content is collapsed when <768px, but
+    // will expand past that for a horizontal display.
+    //
+    // To start (on mobile devices) the navbar links, forms, and buttons are stacked
+    // vertically and include a `max-height` to overflow in case you have too much
+    // content for the user's viewport.
+
+    %#{$s7nxt-navbar-name}__collapse,
+    .#{$s7nxt-navbar-name}__collapse {
+        overflow-x: visible;
+        padding-right: $s7nxt-navbar-padding-horizontal;
+        padding-left:  $s7nxt-navbar-padding-horizontal;
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+        @extend %clearfix;
+        -webkit-overflow-scrolling: touch;
+
+        &.in {
+            overflow-y: auto;
+        }
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            width: auto;
+            border-top: 0;
+            box-shadow: none;
+
+            &.collapse {
+                display: block !important;
+            }
+
+            &.in {
+                overflow-y: visible;
+            }
+
+            // Undo the collapse side padding for navbars with containers to ensure
+            // alignment of right-aligned contents.
+            .#{$s7nxt-navbar-name}--fixed-top &,
+            .#{$s7nxt-navbar-name}--static-top &,
+            .#{$s7nxt-navbar-name}--fixed-bottom & {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+
+    .#{$s7nxt-navbar-name}--fixed-top,
+    .#{$s7nxt-navbar-name}--fixed-bottom {
+        .#{$s7nxt-navbar-name}__collapse {
+            max-height: $s7nxt-navbar-collapse-max-height-mobile;
+
+            @include media-query(md-and-up, $s7nxt-navbar-breakpoints) /* & oriantation landscape */ & {
+                max-height: $s7nxt-navbar-collapse-max-height;
+            }
+        }
+    }
+
+
+    // Both navbar header and collapse
+    //
+    // When a container is present, change the behavior of the header and collapse.
+
+    .o-container,
+    .o-container-fluid {
+        > .#{$s7nxt-navbar-name}__header,
+        > .#{$s7nxt-navbar-name}__collapse {
+            margin-right: -$s7nxt-navbar-padding-horizontal;
+            margin-left:  -$s7nxt-navbar-padding-horizontal;
+
+            @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+                margin-right: 0;
+                margin-left:  0;
+            }
+        }
+    }
+
+
+    //
+    // Navbar alignment options
+    //
+    // Display the navbar across the entirety of the page or fixed it to the top or
+    // bottom of the page.
+
+    // Static top (unfixed, but 100% wide) navbar
+    .#{$s7nxt-navbar-name}--static-top {
+        z-index: $s7nxt-zindex-navbar;
+        border-width: 0 0 1px;
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            border-radius: 0;
+        }
+    }
+
+    // Fix the top/bottom navbars when screen real estate supports it
+    .#{$s7nxt-navbar-name}--fixed-top,
+    .#{$s7nxt-navbar-name}--fixed-bottom {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: $s7nxt-zindex-navbar-fixed;
+
+        // Undo the rounded corners
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            border-radius: 0;
+        }
+    }
+    .#{$s7nxt-navbar-name}--fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .#{$s7nxt-navbar-name}--fixed-bottom {
+        bottom: 0;
+        margin-bottom: 0; // override .#{$s7nxt-navbar-name} defaults
+        border-width: 1px 0 0;
+    }
+
+
+    // Brand/project name
+
+    %#{$s7nxt-navbar-name}__brand,
+    .#{$s7nxt-navbar-name}__brand {
+        float: left;
+        padding: $s7nxt-navbar-padding-vertical $s7nxt-navbar-padding-horizontal;
+        @include s7nxt-font-size($s7nxt-font-size--large, $s7nxt-base-line-height);
+        height: $s7nxt-navbar-height-mobile;
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+
+        @at-root .hasVisualTeaser & {
+            max-width: $s7nxt-navbar-brand-has-visual-teaser-width;
+        }
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            height: $s7nxt-navbar-height;
+
+            @at-root .hasVisualTeaser & {
+                max-width: inherit;
+            }
+        }
+
+        > img {
+            display: block;
+        }
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            .#{$s7nxt-navbar-name} > .o-container &,
+            .#{$s7nxt-navbar-name} > .o-container-fluid & {
+                margin-left: -$s7nxt-navbar-padding-horizontal;
+            }
+        }
+    }
+
+    // Visual teaser
+    //
+    // Can be a trust badge or a collection of images in a container, displayed
+    // on the right side of nav, but not in the responsive mobile menu
+    // Works only when the menu nav items are disabled
+    .#{$s7nxt-navbar-name}__visual-teaser {
+        float: right;
+        margin-right: $s7nxt-navbar-padding-horizontal;
+        padding: $s7nxt-navbar-padding-vertical $s7nxt-navbar-padding-horizontal 0 0;
+        display: none;
+
+        img {
+            max-width: 100%;
+        }
+
+        @at-root .hasVisualTeaser & {
+            display: block;
+        }
+    }
+
+
+    // Navbar toggle
+    //
+    // Custom button for toggling the `.#{$s7nxt-navbar-name}-collapse`, powered by the collapse
+    // JavaScript plugin.
+
+    %#{$s7nxt-navbar-name}__toggle,
+    .#{$s7nxt-navbar-name}__toggle {
+        position: relative;
+        float: right;
+        margin-right: $s7nxt-navbar-padding-horizontal;
+        padding: 9px 10px;
+        @include navbar-vertical-align(34px);
+        background-color: transparent;
+        background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+        border: 1px solid transparent;
+        border-radius: $s7nxt-border-radius-base;
+
+        // We remove the `outline` here, but later compensate by attaching `:hover`
+        // styles to `:focus`.
+        &:focus {
+            outline: 0;
+        }
+
+        // Bars - TODO: do we need that?
+        .icon-bar {
+            display: block;
+            width: 22px;
+            height: 2px;
+            border-radius: 1px;
+        }
+        .icon-bar + .icon-bar {
+            margin-top: 4px;
+        }
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            display: none;
+        }
+    }
+
+
+    // Navbar nav links
+    //
+    // Builds on top of the `.nav` components with its own modifier class to make
+    // the nav the full height of the horizontal nav (above 768px).
+
+    %#{$s7nxt-navbar-name}--nav,
+    .#{$s7nxt-navbar-name}--nav {
+        margin: ($s7nxt-navbar-padding-vertical / 2) (-$s7nxt-navbar-padding-horizontal);
+
+        > li > a {
+            padding-top:    10px;
+            padding-bottom: 10px;
+            line-height: $s7nxt-base-line-height;
+            border-bottom: $s7nxt-navbar-link-border-bottom-width;
+        }
+
+        // Dropdowns get custom display when collapsed
+        // %render_open_dropdown_menu {
+        //     .open .dropdown__menu {
+        //         position: static;
+        //         float: none;
+        //         width: auto;
+        //         margin-top: 0;
+        //         background-color: transparent;
+        //         border: 0;
+        //         box-shadow: none;
+        //         > li > a,
+        //         .dropdown__header {
+        //             padding: 5px 15px 5px 25px;
+        //         }
+        //         > li > a {
+        //             line-height: $s7nxt-base-line-height;
+        //             &:hover,
+        //             &:focus {
+        //                 background-image: none;
+        //             }
+        //         }
+        //     }
+        // }
+
+        @include media-query(sm, $s7nxt-navbar-breakpoints) {
+            // @TODO: check why this renders '.o-navbar--nav' twice
+            // @extend %render_open_dropdown_menu;
+            .open .dropdown__menu {
+                // position: static;
+                position: relative; // Bugfix: z-index for dropdown-backdrop and dropdown-menu are not really working on mobile, dropdown links are not clickable
+                float: none;
+                width: auto;
+                margin-top: 0;
+                background-color: transparent;
+                border: 0;
+                box-shadow: none;
+                > li > a,
+                .dropdown__header {
+                    padding: 5px 15px 5px 25px;
+                }
+                > li > a {
+                    line-height: $s7nxt-base-line-height;
+                    &:hover,
+                    &:focus {
+                        background-image: none;
+                    }
+                }
+            }
+        }
+
+        // Uncollapse the nav
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            float: left;
+            margin: 0;
+
+            > li {
+                float: left;
+                > a {
+                    padding-top:    $s7nxt-navbar-padding-vertical;
+                    padding-bottom: $s7nxt-navbar-padding-vertical;
+                }
+            }
+        }
+    }
+
+
+    // Navbar form
+    //
+    // Extension of the `.form-inline` with some extra flavor for optimum display in
+    // our navbars.
+
+    .#{$s7nxt-navbar-name}__form {
+        margin-left: -$s7nxt-navbar-padding-horizontal;
+        margin-right: -$s7nxt-navbar-padding-horizontal;
+        padding: 10px $s7nxt-navbar-padding-horizontal;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 1px 0 rgba(255,255,255,.1);
+
+        // Mixin behavior for optimum display
+        @include form-inline;
+
+        .form__group {
+
+            @include media-query(sm, $s7nxt-navbar-breakpoints) {
+                margin-bottom: 5px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            @include media-query(md, $s7nxt-navbar-breakpoints) {
+                margin-bottom: 5px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        // Vertically center in expanded, horizontal navbar
+        @include navbar-vertical-align($s7nxt-input-height-base);
+
+        // Undo 100% width for pull classes
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            width: auto;
+            border: 0;
+            margin-left: 0;
+            margin-right: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            box-shadow: none;
+        }
+    }
+
+
+    // Dropdown menus
+
+    // Menu position and menu carets
+    .#{$s7nxt-navbar-name}--nav > li > .dropdown__menu {
+        margin-top: 0;
+        @include border-top-radius(0);
+    }
+    // Menu position and menu caret support for dropups via extra dropup class
+    .#{$s7nxt-navbar-name}--fixed-bottom .#{$s7nxt-navbar-name}--nav > li > .dropdown__menu {
+        margin-bottom: 0;
+        @include border-top-radius($s7nxt-navbar-border-radius);
+        @include border-bottom-radius(0);
+    }
+
+
+    // Buttons in navbars
+    //
+    // Vertically center a button within a navbar (when *not* in a form).
+
+    %#{$s7nxt-navbar-name}__btn,
+    .#{$s7nxt-navbar-name}__btn {
+        @include navbar-vertical-align($s7nxt-input-height-base);
+
+        &.btn--sm {
+            @include navbar-vertical-align($s7nxt-input-height-small);
+        }
+        &.btn--xs {
+            @include navbar-vertical-align(22);
+        }
+    }
+
+
+    // Text in navbars
+    //
+    // Add a class to make any element properly align itself vertically within the navbars.
+
+    .#{$s7nxt-navbar-name}__text {
+        @include navbar-vertical-align($s7nxt-base-line-height);
+
+        @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+            float: left;
+            margin-left: $s7nxt-navbar-padding-horizontal;
+            margin-right: $s7nxt-navbar-padding-horizontal;
+        }
+    }
+
+
+    // Component alignment
+    //
+    // Repurpose the pull utilities as their own navbar utilities to avoid specificity
+    // issues with parents and chaining. Only do this when the navbar is uncollapsed
+    // though so that navbar contents properly stack and align in mobile.
+    //
+    // Declared after the navbar components to ensure more specificity on the margins.
+
+    @include media-query(md-and-up, $s7nxt-navbar-breakpoints) {
+        .#{$s7nxt-navbar-name}--left {
+            float: left !important;
+        }
+        .#{$s7nxt-navbar-name}--right {
+            float: right !important;
+            margin-right: -$s7nxt-navbar-padding-horizontal;
+
+            ~ .#{$s7nxt-navbar-name}--right {
+                margin-right: 0;
+            }
+        }
+    }
+
+}

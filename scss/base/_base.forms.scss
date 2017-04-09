@@ -1,0 +1,407 @@
+// #Forms
+
+$s7nxt-forms-name: 'o-form' !default;
+
+//** Default `.o-form__control` height
+$s7nxt-input-height-base:              ($s7nxt-base-line-height + ($s7nxt-padding-base-vertical * 2) + 2) !default;
+//** Large `.o-form__control` height
+$s7nxt-input-height-large:             (ceil($s7nxt-font-size--large * $s7nxt-line-height-large) + ($s7nxt-padding-large-vertical * 2) + 2) !default;
+//** Small `.o-form__control` height
+$s7nxt-input-height-small:             (floor($s7nxt-font-size--small * $s7nxt-line-height-small) + ($s7nxt-padding-small-vertical * 2) + 2) !default;
+
+//** `.o-form__group` margin
+$s7nxt-form-group-margin-bottom:       $s7nxt-base-spacing-unit--small !default;
+
+
+// scss-lint:disable QualifyingElement
+
+//
+// Textual form controls
+//
+
+%#{$s7nxt-forms-name}__control,
+.#{$s7nxt-forms-name}__control {
+    @include box-shadow($s7nxt-input-box-shadow);
+    @include transition($s7nxt-input-transition);
+    @include s7nxt-font-size($s7nxt-font-size, $s7nxt-base-line-height);
+    display: block;
+    width: 100%;
+    // // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    // height: $s7nxt-input-height;
+    padding: $s7nxt-input-padding-y $s7nxt-input-padding-x;
+    line-height: $s7nxt-input-line-height;
+    color: $s7nxt-input-color;
+    background-color: $s7nxt-input-bg;
+    // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214.
+    background-image: none;
+    border: $s7nxt-input-btn-border-width solid $s7nxt-input-border-color;
+    background-clip: padding-box;
+
+    // Note: This has no effect on <select>s in some browsers, due to the limited stylability of `<select>`s in CSS.
+    @if $s7nxt-enable-rounded {
+    // Manually use the if/else instead of the mixin to account for iOS override
+        border-radius: $s7nxt-input-border-radius;
+    } @else {
+    // Otherwise undo the iOS default
+        border-radius: 0;
+    }
+
+
+    // Unstyle the caret on `<select>`s in IE10+.
+    &::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    @include form-control-focus();
+
+    // Placeholder
+    &::placeholder {
+        color: $s7nxt-input-color-placeholder;
+        // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526.
+        opacity: 1;
+    }
+
+    // Disabled and read-only inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &:disabled,
+    &[readonly] {
+        background-color: $s7nxt-input-bg-disabled;
+        // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655.
+        opacity: 1;
+    }
+
+    &:disabled {
+        cursor: $s7nxt-cursor-disabled;
+    }
+}
+
+select.o-form__control {
+    &:not([size]):not([multiple]) {
+        $select-border-width: ($s7nxt-border-width * 2);
+        height: calc(#{$s7nxt-input-height} + #{$select-border-width});
+    }
+
+    &:focus::-ms-value {
+        // Suppress the nested default white text on blue background highlight given to
+        // the selected option text when the (still closed) <select> receives focus
+        // in IE and (under certain conditions) Edge, as it looks bad and cannot be made to
+        // match the appearance of the native widget.
+        // See https://github.com/twbs/bootstrap/issues/19398.
+        color: $s7nxt-input-color;
+        background-color: $s7nxt-input-bg;
+    }
+}
+
+// Make file inputs better match text inputs by forcing them to new lines.
+.o-form__control-file,
+.o-form__control-range {
+    display: block;
+}
+
+
+//
+// Labels
+//
+
+// For use with horizontal and inline forms, when you need the label text to
+// align with the form controls.
+.col-form-label {
+    padding-top: calc(#{$s7nxt-input-padding-y} - #{$s7nxt-input-btn-border-width} * 2);
+    padding-bottom: calc(#{$s7nxt-input-padding-y} - #{$s7nxt-input-btn-border-width} * 2);
+    margin-bottom: 0; // Override the `<label>` default
+}
+
+.col-form-label-lg {
+    padding-top: calc(#{$s7nxt-input-padding-y-lg} - #{$s7nxt-input-btn-border-width} * 2);
+    padding-bottom: calc(#{$s7nxt-input-padding-y-lg} - #{$s7nxt-input-btn-border-width} * 2);
+    font-size: $s7nxt-font-size-lg;
+}
+
+.col-form-label-sm {
+    padding-top: calc(#{$s7nxt-input-padding-y-sm} - #{$s7nxt-input-btn-border-width} * 2);
+    padding-bottom: calc(#{$s7nxt-input-padding-y-sm} - #{$s7nxt-input-btn-border-width} * 2);
+    font-size: $s7nxt-font-size-sm;
+}
+
+
+//
+// Legends
+//
+
+// For use with horizontal and inline forms, when you need the legend text to
+// be the same size as regular labels, and to align with the form controls.
+.col-form-legend {
+    padding-top: $s7nxt-input-padding-y;
+    padding-bottom: $s7nxt-input-padding-y;
+    margin-bottom: 0;
+    font-size: $s7nxt-font-size-base;
+}
+
+
+// Static form control text
+//
+// Apply class to an element to make any string of text align with labels in a
+// horizontal form layout.
+
+.o-form__control-static {
+    padding-top: $s7nxt-input-padding-y;
+    padding-bottom: $s7nxt-input-padding-y;
+    margin-bottom: 0; // match inputs if this class comes on inputs with default margins
+    line-height: $s7nxt-input-line-height;
+    border: solid transparent;
+    border-width: $s7nxt-input-btn-border-width 0;
+
+    &.o-form__control--sm,
+    &.o-form__control--lg {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+
+// Form control sizing
+//
+// Build on `.o-form__control` with modifier classes to decrease or increase the
+// height and font-size of form controls.
+//
+// The `.o-form__group-* form-control` variations are sadly duplicated to avoid the
+// issue documented in https://github.com/twbs/bootstrap/issues/15074.
+
+.o-form__control--sm {
+    @include border-radius($s7nxt-input-border-radius-sm);
+    padding: $s7nxt-input-padding-y-sm $s7nxt-input-padding-x-sm;
+    font-size: $s7nxt-font-size-sm;
+}
+
+select.o-form__control--sm {
+    &:not([size]):not([multiple]) {
+        height: $s7nxt-input-height-sm;
+    }
+}
+
+.o-form__control--lg {
+    @include border-radius($s7nxt-input-border-radius-lg);
+    padding: $s7nxt-input-padding-y-lg $s7nxt-input-padding-x-lg;
+    font-size: $s7nxt-font-size-lg;
+}
+
+select.o-form__control--lg {
+    &:not([size]):not([multiple]) {
+        height: $s7nxt-input-height-lg;
+    }
+}
+
+
+// Form groups
+//
+// Designed to help with the organization and spacing of vertical forms. For
+// horizontal forms, use the predefined grid classes.
+
+.o-form__group {
+    margin-bottom: $s7nxt-form-group-margin-bottom;
+}
+
+.o-form__text {
+    display: block;
+    margin-top: $s7nxt-form-text-margin-top;
+}
+
+
+// Checkboxes and radios
+//
+// Indent the labels to position radios/checkboxes as hanging controls.
+
+.o-form__check {
+    position: relative;
+    display: block;
+    margin-bottom: $s7nxt-form-check-margin-bottom;
+
+    &.disabled {
+        .o-form__check-label {
+            color: $s7nxt-text-muted;
+            cursor: $s7nxt-cursor-disabled;
+        }
+    }
+}
+
+.o-form__check-label {
+    padding-left: $s7nxt-form-check-input-gutter;
+    margin-bottom: 0; // Override default `<label>` bottom margin
+    cursor: pointer;
+}
+
+.o-form__check-input {
+    position: absolute;
+    margin-top: $s7nxt-form-check-input-margin-y;
+    margin-left: -$s7nxt-form-check-input-gutter;
+
+    &:only-child {
+        position: static;
+    }
+}
+
+// Radios and checkboxes on same line
+.o-form__check-inline {
+    display: inline-block;
+
+    .o-form__check-label {
+        vertical-align: middle;
+    }
+
+    + .o-form__check-inline {
+        margin-left: $s7nxt-form-check-inline-margin-x;
+    }
+}
+
+
+// Form control feedback states
+//
+// Apply contextual and semantic states to individual form controls.
+
+.o-form__control-feedback {
+    margin-top: $s7nxt-form-feedback-margin-top;
+}
+
+.o-form__control--success,
+.o-form__control--warning,
+.o-form__control--danger {
+    padding-right: ($s7nxt-input-padding-x * 3);
+    background-position: center right ($s7nxt-input-height / 4);
+    background-repeat: no-repeat;
+    background-size: ($s7nxt-input-height / 2) ($s7nxt-input-height / 2);
+}
+
+// Form validation states
+.has-success {
+    @include form-control-validation($s7nxt-brand-success);
+
+    .o-form__control--success {
+        background-image: $s7nxt-form-icon-success;
+    }
+}
+
+.has-warning {
+    @include form-control-validation($s7nxt-brand-warning);
+
+    .o-form__control--warning {
+        background-image: $s7nxt-form-icon-warning;
+    }
+}
+
+.has-danger {
+    @include form-control-validation($s7nxt-brand-danger);
+
+    .o-form__control--danger {
+        background-image: $s7nxt-form-icon-danger;
+    }
+}
+
+
+// Inline forms
+//
+// Make forms appear inline(-block) by adding the `.o-form__inline` class. Inline
+// forms begin stacked on extra small (mobile) devices and then go inline when
+// viewports reach <768px.
+//
+// Requires wrapping inputs and labels with `.o-form__group` for proper display of
+// default HTML form controls and our custom form controls (e.g., input groups).
+
+.o-form__inline {
+    display: flex;
+    align-items: center; // Prevent shorter elements from growing to same height as others (e.g., small buttons growing to normal sized button height)
+    flex-flow: row wrap;
+
+    // Because we use flex, the initial sizing of checkboxes is collapsed and
+    // doesn't occupy the full-width (which is what we want for xs grid tier),
+    // so we force that here.
+    .o-form__check {
+        width: 100%;
+    }
+
+    // Kick in the inline
+    @include media-query(sm) {
+        label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        // Inline-block all the things for "inline"
+        .o-form__group {
+            display: flex;
+            flex: 0 0 auto;
+            flex-flow: row wrap;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        // Allow folks to *not* use `.o-form__group`
+        .o-form__control {
+            display: inline-block;
+            width: auto; // Prevent labels from stacking above inputs in `.o-form__group`
+            vertical-align: middle;
+        }
+
+        // Make static controls behave like regular ones
+        .o-form__control-static {
+            display: inline-block;
+        }
+
+        .o-input-group {
+            width: auto;
+        }
+
+        .o-form__control-label {
+            margin-bottom: 0;
+            vertical-align: middle;
+        }
+
+        // Remove default margin on radios/checkboxes that were used for stacking, and
+        // then undo the floating of radios and checkboxes to match.
+        .o-form__check {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: auto;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .o-form__check-label {
+            padding-left: 0;
+        }
+
+        .o-form__check-input {
+            position: relative;
+            margin-top: 0;
+            margin-right: $s7nxt-form-check-input-margin-x;
+            margin-left: 0;
+        }
+
+        // Custom form controls
+        .custom-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 0;
+        }
+
+        .custom-control-indicator {
+            position: static;
+            display: inline-block;
+            margin-right: $s7nxt-form-check-input-margin-x; // Flexbox alignment means we lose our HTML space here, so we compensate.
+            vertical-align: text-bottom;
+        }
+
+        // Re-override the feedback icon.
+        .has-feedback .o-form__control-feedback {
+            top: 0;
+        }
+    }
+}

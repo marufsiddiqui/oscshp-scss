@@ -1,0 +1,74 @@
+$s7nxt-arrow-default-bg-color:           white !default;
+$s7nxt-arrow-tint-bg-color:              $s7nxt-gray-lighter !default;
+$s7nxt-arrow-brand-bg-color:             $s7nxt-brand-color !default;
+
+@if ($s7nxt-enable-theme == true and $s7nxt-enable-arrows == true) {
+
+    .#{$s7nxt-arrow-name} {
+
+        &--default {
+            &:after {
+                border-color: $s7nxt-arrow-default-bg-color;
+            }
+
+            &.#{$s7nxt-arrow-name}--vertical {
+                &:before {
+                    border-color: $s7nxt-arrow-default-bg-color;
+                }
+            }
+
+            &.#{$s7nxt-arrow-name}-trans {
+                &:before,
+                &:after {
+                    background-color: $s7nxt-arrow-default-bg-color;
+                }
+            }
+        }
+
+        &--tint {
+            &:after {
+                border-color: $s7nxt-arrow-tint-bg-color;
+            }
+
+            &.#{$s7nxt-arrow-name}--vertical {
+                &:before {
+                    border-color: $s7nxt-arrow-tint-bg-color;
+                }
+            }
+
+            &.#{$s7nxt-arrow-name}-trans {
+                &:before,
+                &:after {
+                    background-color: $s7nxt-arrow-tint-bg-color;
+                }
+            }
+        }
+
+        &--brand {
+            &:after {
+                border-color: $s7nxt-arrow-brand-bg-color;
+            }
+
+            &.#{$s7nxt-arrow-name}--vertical {
+                &:before {
+                    border-color: $s7nxt-arrow-brand-bg-color;
+                }
+            }
+
+            &.#{$s7nxt-arrow-name}-trans {
+                &:before,
+                &:after {
+                    background-color: $s7nxt-arrow-brand-bg-color;
+                }
+            }
+        }
+
+        &--vertical {
+
+            &:before,
+            &:after {
+                border-color: white;
+            }
+        }
+    }
+}

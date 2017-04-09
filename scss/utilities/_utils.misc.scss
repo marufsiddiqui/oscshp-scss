@@ -1,0 +1,25 @@
+@if ($s7nxt-enable-utils-misc == true) {
+
+    .u-block {
+        display: block !important;
+    }
+
+    .u-inline-block {
+        display: inline-block !important;
+    }
+
+    .u-inline {
+        display: inline !important;
+    }
+}
+
+
+.o-table {
+    display: table;
+    width: 100%;
+
+    &__cell {
+        display: table-cell;
+        vertical-align: top;
+    }
+}

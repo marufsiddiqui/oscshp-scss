@@ -1,0 +1,42 @@
+/*------------------------------------*\
+    #Band Theme
+\*------------------------------------*/
+
+$s7nxt-band-name: "o-band" !default;
+
+$s7nxt-band-tint-bg-color:              $s7nxt-gray-lighter !default;
+$s7nxt-band-brand-bg-color:             $s7nxt-brand-color !default;
+$s7nxt-band-dark-font-color:            white !default;
+
+@if ($s7nxt-enable-theme == true and $s7nxt-enable-band == true) {
+
+    .#{$s7nxt-band-name} {
+        background-color: white;
+        border-bottom: 0 solid;
+        border-color: white;
+
+        &--tint {
+            background-color: $s7nxt-band-tint-bg-color;
+            border-color: $s7nxt-band-tint-bg-color;
+        }
+
+        &--brand {
+            background-color: $s7nxt-band-brand-bg-color;
+            border-color: $s7nxt-band-brand-bg-color;
+
+            * {
+                color: $s7nxt-band-dark-font-color;
+            }
+        }
+
+        &--dark {
+            color: $s7nxt-band-dark-font-color;
+        }
+
+
+        &--bg-img {
+            transition: min-height 1s;
+        }
+
+    }
+}

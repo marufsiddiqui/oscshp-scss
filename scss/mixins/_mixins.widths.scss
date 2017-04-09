@@ -1,0 +1,78 @@
+///*------------------------------------*\
+//    #Widths
+//\*------------------------------------*/
+
+// A mixin to spit out our width classes. Pass in the columns we want the widths
+// to have, and an optional suffix for responsive widths. E.g. to create thirds
+// and quarters for a small breakpoint:
+// styleguide:ignore:start
+//
+// @include go-widths(3 4, -sm);
+
+// styleguide:ignore:stop
+
+$gridSep: \/;
+
+@mixin s7nxt-widths($s7nxt-widths-columns, $s7nxt-widths-breakpoint: null, $s7nxt-flex: true) {
+
+    $cssString: "";
+    $gridCssString: if($s7nxt-flex, "o-grid--", "u-");
+
+    // Loop through the number of columns for each denominator of our fractions.
+    @each $s7nxt-widths-denominator in $s7nxt-widths-columns {
+
+        // If we’re trying to make wholes, just spit a 100% width utility out
+        // one time only.
+        @if ($s7nxt-widths-denominator == 1) {
+
+            .#{$gridCssString}1#{$gridSep}#{$s7nxt-widths-denominator}#{$s7nxt-widths-breakpoint} {
+                @if ($s7nxt-flex == true) {
+                    flex: 0 0 100% !important;
+                } @else {
+                    width: 100%;
+                    flex: none !important;
+                }
+                
+            }
+
+        } @else {
+
+            // Begin creating a numberator for our fraction up until we hit the
+            // denominator.
+            @for $s7nxt-widths-numerator from 1 to $s7nxt-widths-denominator {
+
+                // Build a class in the format `.u-3/4`.
+                $widthsValue: ($s7nxt-widths-numerator / $s7nxt-widths-denominator) * 100%;
+                .#{$gridCssString}#{$s7nxt-widths-numerator}#{$gridSep}#{$s7nxt-widths-denominator}#{$s7nxt-widths-breakpoint} {
+                    @if ($s7nxt-flex == true) {
+                        flex: 0 0 $widthsValue;
+                        max-width: $widthsValue;
+                    } @else {
+                        width: $widthsValue;
+                        flex: none !important;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@mixin s7nxt-offsets($s7nxt-widths-columns, $s7nxt-widths-breakpoint: null) {
+
+    // Loop through the number of columns for each denominator of our fractions.
+    @each $s7nxt-widths-denominator in $s7nxt-widths-columns {
+
+        // Begin creating a numberator for our fraction up until we hit the
+        // denominator.
+        @for $s7nxt-widths-numerator from 1 to $s7nxt-widths-denominator {
+
+            // Build a class in the format `o-grid-offset--1/5`.
+            $widthsValue: ($s7nxt-widths-numerator / $s7nxt-widths-denominator) * 100%;
+            .o-grid-offset--#{$s7nxt-widths-numerator}#{$gridSep}#{$s7nxt-widths-denominator}#{$s7nxt-widths-breakpoint} {
+                margin-left: $widthsValue;
+            }
+        }
+    }
+
+}

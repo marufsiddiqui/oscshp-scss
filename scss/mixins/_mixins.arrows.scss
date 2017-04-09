@@ -1,0 +1,111 @@
+/// Returns the opposite direction of each direction in a list
+/// @author Hugo Giraudel
+/// @param {List} $directions - List of initial directions
+/// @return {List} - List of opposite directions
+@function opposite-direction($directions) {
+    $opposite-directions: ();
+    $direction-map: (
+        'top':    'bottom',
+        'right':  'left',
+        'bottom': 'top',
+        'left':   'right',
+        'center': 'center',
+        'ltr':    'rtl',
+        'rtl':    'ltr'
+        );
+
+    @each $direction in $directions {
+        $direction: to-lower-case($direction);
+
+        @if map-has-key($direction-map, $direction) {
+            $opposite-directions: append($opposite-directions, unquote(map-get($direction-map, $direction)));
+        } @else {
+            @warn "No opposite direction can be found for `#{$direction}`. Direction omitted.";
+        }
+    }
+
+    @return $opposite-directions;
+}
+
+/// Arrows helper mixin
+/// @param {Direction} $direction - Arrow direction, either `top`, `right`, `bottom` or `left`
+/// @param {Length} $size [3vm] - Arrow size
+/// @param {Color} $color [inherit] - Arrow color
+@mixin s7nxt-arrows($direction-map: $s7nxt-direction-map, $size: 3vw, $color: inherit ) {
+
+    @if ($s7nxt-enable-arrows == true) {
+
+        // Loop through the direction map
+        @each $direction-name, $direction in $direction-map {
+
+            .o-arrow--#{$direction-name} {
+                position: relative;
+                @if $direction-name == vertical {
+                    border-bottom: none !important;
+                }
+
+                @if $direction-name == vertical {
+                    &:before {
+                        position: absolute;
+                        top: 0;
+                        width: 0;
+                        height: 0;
+                        content: '';
+                        z-index: 5;
+                        border-#{opposite-direction('bottom')}: $size solid;
+
+                        $perpendicular-borders: $size solid transparent !important;
+
+                        border-left:   $perpendicular-borders;
+                        border-right:  $perpendicular-borders;
+                        left: 50%;
+                        margin-left: -$size;
+                    }
+                }
+
+                &:after {
+                    position: absolute;
+                    width: 0;
+                    height: 0;
+                    content: '';
+                    z-index: 5;
+                    @if $direction-name == vertical {
+                        $direction: 'top';
+                    }
+                    border-#{opposite-direction($direction)}: $size solid;
+
+                    $perpendicular-borders: $size solid transparent !important;
+
+                    @if $direction == top or $direction == bottom {
+                        border-left:   $perpendicular-borders;
+                        border-right:  $perpendicular-borders;
+                        left: 50%;
+                        margin-left: -$size;
+                    } @else if $direction == right or $direction == left {
+                        border-bottom: $perpendicular-borders;
+                        border-top:    $perpendicular-borders;
+                        top: 50%;
+                        margin-top: -$size;
+                    }
+
+                    @if $direction-name == top {
+                        top: -$size;
+                    } @else if $direction-name == top-down {
+                        top: 0;
+                    } @else if $direction-name == down-top {
+                        bottom: 0;
+                    } @else if $direction-name == bottom {
+                        bottom: calc(#{-$size} + 1px);
+                    } @else if $direction-name == left {
+                        left: -$size;
+                    } @else if $direction-name == right {
+                        right: -$size;
+                    } @else if $direction-name == vertical {
+                        bottom: 0;
+                    }
+                    border-color: inherit;
+                }
+            }
+        }
+    }
+}
